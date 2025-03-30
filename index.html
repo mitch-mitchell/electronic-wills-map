@@ -650,398 +650,382 @@
 <!-- END EMBEDDED SVG MAP -->
 
 <script>
-// Define states with electronic will legislation, including statute information
-const stateStatutes = {
-  "AZ": {
-    authorizes: "e-wills",
-    statute: "Ariz. Rev. Stat. § 14-2518",
-    url: "https://casetext.com/statute/arizona-revised-statutes/title-14-trusts-estates-and-protective-proceedings/chapter-2-intestate-succession-and-wills/article-5-wills/section-14-2518-electronic-will-requirements-interpretation",
-    description: "Arizona allows for electronic wills that meet specific requirements for electronic signatures and witnessing."
-  },
-  "CO": {
-    authorizes: "both",
-    statute: "Colo. Rev. Stat. § 15-11-1301",
-    url: "https://casetext.com/statute/colorado-revised-statutes/title-15-probate-trusts-and-fiduciaries/colorado-probate-code/article-11-intestate-succession-and-wills/part-13-colorado-uniform-electronic-wills-act/section-15-11-1301-short-title",
-    description: "Colorado has adopted the Uniform Electronic Wills Act, allowing for electronically signed and witnessed wills."
-  },
-  "DC": {
-    authorizes: "e-wills",
-    statute: "D.C. Code § 18-901",
-    url: "https://casetext.com/statute/district-of-columbia-official-code/division-iii-decedents-estates-and-fiduciary-relations/title-18-wills/chapter-9-uniform-electronic-wills-act/section-18-901-short-title",
-    description: "The District of Columbia has adopted the Uniform Electronic Wills Act."
-  },
-  "FL": {
-    authorizes: "e-wills",
-    statute: "Fla. Stat. § 732.522",
-    url: "https://casetext.com/statute/florida-statutes/title-xlii-estates-and-trusts/chapter-732-probate-code-intestate-succession-and-wills/part-v-wills/section-732522-method-and-place-of-execution",
-    description: "Florida permits electronic wills and provides specific requirements for their execution and storage."
-  },
-  "ID": {
-    authorizes: "e-wills",
-    statute: "Idaho Code § 15-2-1101",
-    url: "https://casetext.com/statute/idaho-code/title-15-uniform-probate-code/chapter-2-intestate-succession-wills/part-11-uniform-electronic-wills-act/section-15-2-1101-short-title",
-    description: "Idaho has adopted the Uniform Electronic Wills Act."
-  },
-  "IL": {
-    authorizes: "both",
-    statute: "755 ILCS 6/1-1",
-    url: "https://casetext.com/statute/illinois-compiled-statutes/rights-and-remedies/chapter-755-estates/act-6-electronic-wills-electronic-estate-planning-documents-and-remote-witnesses-act/article-1-general-provisions/section-755-ilcs-61-1-short-title",
-    description: "Illinois has enacted the Electronic Wills, Electronic Estate Planning Documents, and Remote Witnesses Act."
-  },
-  "IN": {
-    authorizes: "e-wills",
-    statute: "Ind. Code § 29-1-21-1",
-    url: "https://casetext.com/statute/indiana-code/title-29-probate/article-1-probate-code/chapter-21-electronic-wills/section-29-1-21-1-purpose-of-chapter-presumptions",
-    description: "Indiana allows electronic wills with specific provisions for electronic signatures and witnessing."
-  },
-  "MD": {
-    authorizes: "e-wills",
-    statute: "Md. Code, Est. & Trusts § 4-101",
-    url: "https://casetext.com/statute/code-of-maryland/article-estates-and-trusts/title-4-wills/subtitle-1-execution-revocation-and-revival/section-4-101-definitions",
-    description: "Maryland's legislation permits electronic signatures for wills and defines parameters for their validity."
-  },
-  "MN": {
-    authorizes: "e-wills",
-    statute: "Minn. Stat. § 524.1-201",
-    url: "https://casetext.com/statute/minnesota-statutes/probate-property-estates-guardianships-anatomical-gifts/chapter-524-uniform-probate-code/article-1-general-provisions-definitions-and-probate-jurisdiction-of-court/part-2-definitions/section-5241-201-general-definitions",
-    description: "Minnesota has updated its probate code to include provisions for electronic wills."
-  },
-  "NV": {
-    authorizes: "e-wills",
-    statute: "Nev. Rev. Stat. § 133.085",
-    url: "https://casetext.com/statute/nevada-revised-statutes/title-12-wills-and-estates-of-deceased-persons/chapter-133-wills/execution/section-133085-electronic-will",
-    description: "Nevada was one of the first states to authorize electronic wills, with specific technological requirements."
-  },
-  "ND": {
-    authorizes: "both",
-    statute: "N.D. Cent. Code § 30.1-37-02",
-    url: "https://casetext.com/statute/north-dakota-century-code/title-301-uniform-probate-code/chapter-301-37-uniform-electronic-wills-act/section-301-37-02-law-applicable-to-electronic-will-principles-of-equity",
-    description: "North Dakota has adopted the Uniform Electronic Wills Act."
-  },
-  "OK": {
-    authorizes: "both",
-    statute: "Okla. Stat. tit. 84, § 901",
-    url: "https://www.oscn.net/applications/oscn/index.asp?level=1&ftdb=STOKST84#Chapter9-UniformElectronicEstatePlanningDocumentsAct",
-    description: "Oklahoma has enacted the Uniform Electronic Estate Planning Documents Act."
-  },
-  "UT": {
-    authorizes: "e-wills",
-    statute: "Utah Code § 75-2-1401",
-    url: "https://casetext.com/statute/utah-code/title-75-utah-uniform-probate-code/chapter-2-intestate-succession-and-wills/part-14-uniform-electronic-wills-act/section-75-2-1401-title",
-    description: "Utah has adopted the Uniform Electronic Wills Act."
-  },
-  "WA": {
-    authorizes: "both",
-    statute: "Wash. Rev. Code § 11.135.005",
-    url: "https://casetext.com/statute/revised-code-of-washington/title-11-probate-and-trust-law/chapter-11135-uniform-electronic-estate-planning-documents-act/section-11135005-short-title",
-    description: "Washington has enacted the Uniform Electronic Estate Planning Documents Act, which includes provisions for electronic wills."
-  },
-  "WI": {
-    authorizes: "both",
-    statute: "Wis. Stat. Sec. 140.147",
-    url: "https://docs.legis.wisconsin.gov/statutes/statutes/140/147",
-    description: "Wisconsin allows for electronic wills and other estate planning documents under specific conditions."
-  }
-};
-
-// Create sets from the statute object for easier checking
-const eWillStates = new Set(
-  Object.keys(stateStatutes).filter(state => 
-    stateStatutes[state].authorizes === "e-wills" || stateStatutes[state].authorizes === "both"
-  )
-);
-
-// Define states that authorize other electronic estate planning documents
-const otherDocsStates = new Set(
-  Object.keys(stateStatutes).filter(state => 
-    stateStatutes[state].authorizes === "both"
-  )
-);
-  
-    document.addEventListener("DOMContentLoaded", function() {
-      // Define a mapping of state codes to full state names
-      const stateNames = {
-        "AL": "Alabama",
-        "AK": "Alaska",
-        "AZ": "Arizona",
-        "AR": "Arkansas",
-        "CA": "California",
-        "CO": "Colorado",
-        "CT": "Connecticut",
-        "DE": "Delaware",
-        "DC": "District of Columbia",
-        "FL": "Florida",
-        "GA": "Georgia",
-        "HI": "Hawaii",
-        "ID": "Idaho",
-        "IL": "Illinois",
-        "IN": "Indiana",
-        "IA": "Iowa",
-        "KS": "Kansas",
-        "KY": "Kentucky",
-        "LA": "Louisiana",
-        "ME": "Maine",
-        "MD": "Maryland",
-        "MA": "Massachusetts",
-        "MI": "Michigan",
-        "MN": "Minnesota",
-        "MS": "Mississippi",
-        "MO": "Missouri",
-        "MT": "Montana",
-        "NE": "Nebraska",
-        "NV": "Nevada",
-        "NH": "New Hampshire",
-        "NJ": "New Jersey",
-        "NM": "New Mexico",
-        "NY": "New York",
-        "NC": "North Carolina",
-        "ND": "North Dakota",
-        "OH": "Ohio",
-        "OK": "Oklahoma",
-        "OR": "Oregon",
-        "PA": "Pennsylvania",
-        "RI": "Rhode Island",
-        "SC": "South Carolina",
-        "SD": "South Dakota",
-        "TN": "Tennessee",
-        "TX": "Texas",
-        "UT": "Utah",
-        "VT": "Vermont",
-        "VA": "Virginia",
-        "WA": "Washington",
-        "WV": "West Virginia",
-        "WI": "Wisconsin",
-        "WY": "Wyoming"
-      };
-  
-      // Create a tooltip element for displaying state names
-      const tooltip = document.createElement('div');
-      tooltip.style.position = 'absolute';
-      tooltip.style.padding = '5px 10px';
-      tooltip.style.background = 'white';
-      tooltip.style.border = '1px solid #ccc';
-      tooltip.style.borderRadius = '5px';
-      tooltip.style.boxShadow = '0 0 5px rgba(0,0,0,0.2)';
-      tooltip.style.pointerEvents = 'none';
-      tooltip.style.opacity = '0';
-      tooltip.style.transition = 'opacity 0.2s';
-      tooltip.style.zIndex = '1000';
-      document.body.appendChild(tooltip);
-  
-      // Select all <path> elements within the SVG that have an id attribute
-      const paths = document.querySelectorAll('svg path[id]');
-      paths.forEach(path => {
-        const stateId = path.id.toUpperCase();
-        const stateName = stateNames[stateId] || stateId;
-        
-        if (eWillStates.has(stateId)) {
-          path.classList.add("highlight");
-        }
-        if (otherDocsStates.has(stateId)) {
-          path.classList.add("other-docs-highlight");
-        }
-        
-        // Add hover behavior for displaying full state name
-        path.addEventListener("mouseover", function(e) {
-          // Show state name in tooltip
-          tooltip.textContent = stateName;
-          tooltip.style.opacity = '1';
-          
-          // Position tooltip near mouse
-          tooltip.style.left = (e.pageX + 10) + 'px';
-          tooltip.style.top = (e.pageY + 10) + 'px';
-          
-          // Highlight the hovered state
-          this.classList.add("active");
-        });
-        
-        // Update tooltip position as mouse moves
-        path.addEventListener("mousemove", function(e) {
-          tooltip.style.left = (e.pageX + 10) + 'px';
-          tooltip.style.top = (e.pageY + 10) + 'px';
-        });
-        
-        // Remove tooltip and highlighting when mouse leaves
-        path.addEventListener("mouseout", function() {
-          tooltip.style.opacity = '0';
-          this.classList.remove("active");
-        });
-
-        // Get the modal elements
-const modal = document.getElementById("stateModal");
-const modalTitle = document.getElementById("modalTitle");
-const modalDescription = document.getElementById("modalDescription");
-const statuteLink = document.getElementById("statuteLink");
-const closeBtn = document.querySelector(".close");
-
-// Close the modal when clicking the close button
-closeBtn.onclick = function() {
-  modal.style.display = "none";
-};
-
-// Close the modal when clicking outside of it
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-};
-        
-        // Add click handler for states that have electronic will legislation
-if (eWillStates.has(stateId) || otherDocsStates.has(stateId)) {
-  path.style.cursor = "pointer";
-  
-  path.addEventListener("click", function() {
-    // Get the state statute information
-    const stateInfo = stateStatutes[stateId];
-    
-    // Update the modal with state information
-    modalTitle.textContent = stateName;
-    modalDescription.textContent = stateInfo.description;
-    statuteLink.href = stateInfo.url;
-    statuteLink.textContent = `View ${stateInfo.statute}`;
-    
-    // Display the modal
-    modal.style.display = "block";
-  });
-}
-  
-      // --- Replace the DC element with a custom star and ensure it floats on top ---
-      // Computed uniform five-point star for DC
-      // Center point: (878.18, 230)
-      // Radius of outer points: 7
-      // Radius of inner points: 3.5
-      const center = { x: 878.18, y: 230 };
-      const outerRadius = 7;
-      const innerRadius = outerRadius * 0.4;
-      
-      // Calculate the points of a uniform five-point star
-      let dcStarPath = `M${center.x},${center.y - outerRadius} `; // Start at top point
-      
-      for (let i = 0; i < 5; i++) {
-        // Outer point
-        const outerAngle = (i * 72 - 90) * Math.PI / 180;
-        const outerX = center.x + outerRadius * Math.cos(outerAngle);
-        const outerY = center.y + outerRadius * Math.sin(outerAngle);
-        
-        // Next inner point
-        const innerAngle = ((i * 72 + 36) - 90) * Math.PI / 180;
-        const innerX = center.x + innerRadius * Math.cos(innerAngle);
-        const innerY = center.y + innerRadius * Math.sin(innerAngle);
-        
-        // Add line to inner point
-        dcStarPath += `L${innerX},${innerY} `;
-        
-        // If not the last point, add line to next outer point
-        if (i < 4) {
-          const nextOuterAngle = ((i + 1) * 72 - 90) * Math.PI / 180;
-          const nextOuterX = center.x + outerRadius * Math.cos(nextOuterAngle);
-          const nextOuterY = center.y + outerRadius * Math.sin(nextOuterAngle);
-          dcStarPath += `L${nextOuterX},${nextOuterY} `;
-        }
-      }
-      
-      dcStarPath += "Z"; // Close the path
-      
-      const dcElement = document.getElementById("DC");
-      if (dcElement) {
-        dcElement.setAttribute("d", dcStarPath);
-        dcElement.classList.add("highlight");
-        dcElement.style.display = "inline";
-        
-        // Add hover behavior for DC element
-        dcElement.addEventListener("mouseover", function(e) {
-          tooltip.textContent = "District of Columbia";
-          tooltip.style.opacity = '1';
-          tooltip.style.left = (e.pageX + 10) + 'px';
-          tooltip.style.top = (e.pageY + 10) + 'px';
-          this.classList.add("active");
-        });
-        
-        dcElement.addEventListener("mousemove", function(e) {
-          tooltip.style.left = (e.pageX + 10) + 'px';
-          tooltip.style.top = (e.pageY + 10) + 'px';
-        });
-        
-        dcElement.addEventListener("mouseout", function() {
-          tooltip.style.opacity = '0';
-          this.classList.remove("active");
-        });
-        
-        // Add DC click handler to show the modal
-dcElement.style.cursor = "pointer";
-
-dcElement.addEventListener("click", function() {
-  const stateId = "DC";
-  const stateInfo = stateStatutes[stateId];
-  
-  // Update the modal with DC information
-  modalTitle.textContent = "District of Columbia";
-  modalDescription.textContent = stateInfo.description;
-  statuteLink.href = stateInfo.url;
-  statuteLink.textContent = `View ${stateInfo.statute}`;
-  
-  // Display the modal
-  modal.style.display = "block";
-});
-        
-        // Create (or re-use) an overlay group and re-append DC there.
-        const ns = "http://www.w3.org/2000/svg";
-        const svgMap = document.querySelector("svg"); // Use querySelector to get the SVG element
-        let overlay = document.getElementById("overlay");
-        if (!overlay) {
-          overlay = document.createElementNS(ns, "g");
-          overlay.setAttribute("id", "overlay");
-          svgMap.appendChild(overlay);
-        }
-        
-        // Clone the DC element to avoid removing it from its original position
-        const dcClone = dcElement.cloneNode(true);
-        dcClone.id = "DC-star";
-        
-        // Add hover behavior for DC clone
-        dcClone.addEventListener("mouseover", function(e) {
-          tooltip.textContent = "District of Columbia";
-          tooltip.style.opacity = '1';
-          tooltip.style.left = (e.pageX + 10) + 'px';
-          tooltip.style.top = (e.pageY + 10) + 'px';
-          dcElement.classList.add("active");
-        });
-        
-        dcClone.addEventListener("mousemove", function(e) {
-          tooltip.style.left = (e.pageX + 10) + 'px';
-          tooltip.style.top = (e.pageY + 10) + 'px';
-        });
-        
-        dcClone.addEventListener("mouseout", function() {
-          tooltip.style.opacity = '0';
-          dcElement.classList.remove("active");
-        });
-        
-        // Add click handler to DC clone to show the modal
-dcClone.style.cursor = "pointer";
-
-dcClone.addEventListener("click", function() {
-  const stateId = "DC";
-  const stateInfo = stateStatutes[stateId];
-  
-  // Update the modal with DC information
-  modalTitle.textContent = "District of Columbia";
-  modalDescription.textContent = stateInfo.description;
-  statuteLink.href = stateInfo.url;
-  statuteLink.textContent = `View ${stateInfo.statute}`;
-  
-  // Display the modal
-  modal.style.display = "block";
-});
-        
-        // Add the clone to the overlay
-        overlay.appendChild(dcClone);
-        
-        // Re-append overlay as the very last element in the SVG so it floats on top
-        svgMap.appendChild(overlay);
-      }
-    });
-  </script>
+   // Define states with electronic will legislation, including statute information
+   const stateStatutes = {
+     "AZ": {
+       authorizes: "e-wills",
+       statute: "Ariz. Rev. Stat. § 14-2518",
+       url: "https://casetext.com/statute/arizona-revised-statutes/title-14-trusts-estates-and-protective-proceedings/chapter-2-intestate-succession-and-wills/article-5-wills/section-14-2518-electronic-will-requirements-interpretation",
+       description: "Arizona allows for electronic wills that meet specific requirements for electronic signatures and witnessing."
+     },
+     "CO": {
+       authorizes: "both",
+       statute: "Colo. Rev. Stat. § 15-11-1301",
+       url: "https://casetext.com/statute/colorado-revised-statutes/title-15-probate-trusts-and-fiduciaries/colorado-probate-code/article-11-intestate-succession-and-wills/part-13-colorado-uniform-electronic-wills-act/section-15-11-1301-short-title",
+       description: "Colorado has adopted the Uniform Electronic Wills Act, allowing for electronically signed and witnessed wills."
+     },
+     "DC": {
+       authorizes: "e-wills",
+       statute: "D.C. Code § 18-901",
+       url: "https://casetext.com/statute/district-of-columbia-official-code/division-iii-decedents-estates-and-fiduciary-relations/title-18-wills/chapter-9-uniform-electronic-wills-act/section-18-901-short-title",
+       description: "The District of Columbia has adopted the Uniform Electronic Wills Act."
+     },
+     "FL": {
+       authorizes: "e-wills",
+       statute: "Fla. Stat. § 732.522",
+       url: "https://casetext.com/statute/florida-statutes/title-xlii-estates-and-trusts/chapter-732-probate-code-intestate-succession-and-wills/part-v-wills/section-732522-method-and-place-of-execution",
+       description: "Florida permits electronic wills and provides specific requirements for their execution and storage."
+     },
+     "ID": {
+       authorizes: "e-wills",
+       statute: "Idaho Code § 15-2-1101",
+       url: "https://casetext.com/statute/idaho-code/title-15-uniform-probate-code/chapter-2-intestate-succession-wills/part-11-uniform-electronic-wills-act/section-15-2-1101-short-title",
+       description: "Idaho has adopted the Uniform Electronic Wills Act."
+     },
+     "IL": {
+       authorizes: "both",
+       statute: "755 ILCS 6/1-1",
+       url: "https://casetext.com/statute/illinois-compiled-statutes/rights-and-remedies/chapter-755-estates/act-6-electronic-wills-electronic-estate-planning-documents-and-remote-witnesses-act/article-1-general-provisions/section-755-ilcs-61-1-short-title",
+       description: "Illinois has enacted the Electronic Wills, Electronic Estate Planning Documents, and Remote Witnesses Act."
+     },
+     "IN": {
+       authorizes: "e-wills",
+       statute: "Ind. Code § 29-1-21-1",
+       url: "https://casetext.com/statute/indiana-code/title-29-probate/article-1-probate-code/chapter-21-electronic-wills/section-29-1-21-1-purpose-of-chapter-presumptions",
+       description: "Indiana allows electronic wills with specific provisions for electronic signatures and witnessing."
+     },
+     "MD": {
+       authorizes: "e-wills",
+       statute: "Md. Code, Est. & Trusts § 4-101",
+       url: "https://casetext.com/statute/code-of-maryland/article-estates-and-trusts/title-4-wills/subtitle-1-execution-revocation-and-revival/section-4-101-definitions",
+       description: "Maryland's legislation permits electronic signatures for wills and defines parameters for their validity."
+     },
+     "MN": {
+       authorizes: "e-wills",
+       statute: "Minn. Stat. § 524.1-201",
+       url: "https://casetext.com/statute/minnesota-statutes/probate-property-estates-guardianships-anatomical-gifts/chapter-524-uniform-probate-code/article-1-general-provisions-definitions-and-probate-jurisdiction-of-court/part-2-definitions/section-5241-201-general-definitions",
+       description: "Minnesota has updated its probate code to include provisions for electronic wills."
+     },
+     "NV": {
+       authorizes: "e-wills",
+       statute: "Nev. Rev. Stat. § 133.085",
+       url: "https://casetext.com/statute/nevada-revised-statutes/title-12-wills-and-estates-of-deceased-persons/chapter-133-wills/execution/section-133085-electronic-will",
+       description: "Nevada was one of the first states to authorize electronic wills, with specific technological requirements."
+     },
+     "ND": {
+       authorizes: "both",
+       statute: "N.D. Cent. Code § 30.1-37-02",
+       url: "https://casetext.com/statute/north-dakota-century-code/title-301-uniform-probate-code/chapter-301-37-uniform-electronic-wills-act/section-301-37-02-law-applicable-to-electronic-will-principles-of-equity",
+       description: "North Dakota has adopted the Uniform Electronic Wills Act."
+     },
+     "OK": {
+       authorizes: "both",
+       statute: "Okla. Stat. tit. 84, § 901",
+       url: "https://www.oscn.net/applications/oscn/index.asp?level=1&ftdb=STOKST84#Chapter9-UniformElectronicEstatePlanningDocumentsAct",
+       description: "Oklahoma has enacted the Uniform Electronic Estate Planning Documents Act."
+     },
+     "UT": {
+       authorizes: "e-wills",
+       statute: "Utah Code § 75-2-1401",
+       url: "https://casetext.com/statute/utah-code/title-75-utah-uniform-probate-code/chapter-2-intestate-succession-and-wills/part-14-uniform-electronic-wills-act/section-75-2-1401-title",
+       description: "Utah has adopted the Uniform Electronic Wills Act."
+     },
+     "WA": {
+       authorizes: "both",
+       statute: "Wash. Rev. Code § 11.135.005",
+       url: "https://casetext.com/statute/revised-code-of-washington/title-11-probate-and-trust-law/chapter-11135-uniform-electronic-estate-planning-documents-act/section-11135005-short-title",
+       description: "Washington has enacted the Uniform Electronic Estate Planning Documents Act, which includes provisions for electronic wills."
+     },
+     "WI": {
+       authorizes: "both",
+       statute: "Wis. Stat. Sec. 140.147",
+       url: "https://docs.legis.wisconsin.gov/statutes/statutes/140/147",
+       description: "Wisconsin allows for electronic wills and other estate planning documents under specific conditions."
+     }
+   };
+   
+   document.addEventListener("DOMContentLoaded", function() {
+     // Create sets from the statute object for easier checking
+     const eWillStates = new Set(
+       Object.keys(stateStatutes).filter(state => 
+         stateStatutes[state].authorizes === "e-wills" || stateStatutes[state].authorizes === "both"
+       )
+     );
+     
+     // Define states that authorize other electronic estate planning documents
+     const otherDocsStates = new Set(
+       Object.keys(stateStatutes).filter(state => 
+         stateStatutes[state].authorizes === "both"
+       )
+     );
+     
+     // Define a mapping of state codes to full state names
+     const stateNames = {
+       "AL": "Alabama",
+       "AK": "Alaska",
+       "AZ": "Arizona",
+       "AR": "Arkansas",
+       "CA": "California",
+       "CO": "Colorado",
+       "CT": "Connecticut",
+       "DE": "Delaware",
+       "DC": "District of Columbia",
+       "FL": "Florida",
+       "GA": "Georgia",
+       "HI": "Hawaii",
+       "ID": "Idaho",
+       "IL": "Illinois",
+       "IN": "Indiana",
+       "IA": "Iowa",
+       "KS": "Kansas",
+       "KY": "Kentucky",
+       "LA": "Louisiana",
+       "ME": "Maine",
+       "MD": "Maryland",
+       "MA": "Massachusetts",
+       "MI": "Michigan",
+       "MN": "Minnesota",
+       "MS": "Mississippi",
+       "MO": "Missouri",
+       "MT": "Montana",
+       "NE": "Nebraska",
+       "NV": "Nevada",
+       "NH": "New Hampshire",
+       "NJ": "New Jersey",
+       "NM": "New Mexico",
+       "NY": "New York",
+       "NC": "North Carolina",
+       "ND": "North Dakota",
+       "OH": "Ohio",
+       "OK": "Oklahoma",
+       "OR": "Oregon",
+       "PA": "Pennsylvania",
+       "RI": "Rhode Island",
+       "SC": "South Carolina",
+       "SD": "South Dakota",
+       "TN": "Tennessee",
+       "TX": "Texas",
+       "UT": "Utah",
+       "VT": "Vermont",
+       "VA": "Virginia",
+       "WA": "Washington",
+       "WV": "West Virginia",
+       "WI": "Wisconsin",
+       "WY": "Wyoming"
+     };
+     
+     // Get modal elements
+     const modal = document.getElementById("stateModal");
+     const modalTitle = document.getElementById("modalTitle");
+     const modalDescription = document.getElementById("modalDescription");
+     const statuteLink = document.getElementById("statuteLink");
+     const closeBtn = document.querySelector(".close");
+     
+     // Setup modal close behavior
+     closeBtn.onclick = function() {
+       modal.style.display = "none";
+     };
+     
+     window.onclick = function(event) {
+       if (event.target == modal) {
+         modal.style.display = "none";
+       }
+     };
+     
+     // Create a tooltip element for displaying state names
+     const tooltip = document.createElement('div');
+     tooltip.style.position = 'absolute';
+     tooltip.style.padding = '5px 10px';
+     tooltip.style.background = 'white';
+     tooltip.style.border = '1px solid #ccc';
+     tooltip.style.borderRadius = '5px';
+     tooltip.style.boxShadow = '0 0 5px rgba(0,0,0,0.2)';
+     tooltip.style.pointerEvents = 'none';
+     tooltip.style.opacity = '0';
+     tooltip.style.transition = 'opacity 0.2s';
+     tooltip.style.zIndex = '1000';
+     document.body.appendChild(tooltip);
+     
+     // Select all <path> elements within the SVG that have an id attribute
+     const paths = document.querySelectorAll('svg path[id]');
+     paths.forEach(path => {
+       const stateId = path.id.toUpperCase();
+       const stateName = stateNames[stateId] || stateId;
+       
+       // Apply highlighting classes
+       if (eWillStates.has(stateId)) {
+         path.classList.add("highlight");
+       }
+       if (otherDocsStates.has(stateId)) {
+         path.classList.add("other-docs-highlight");
+       }
+       
+       // Add hover behavior
+       path.addEventListener("mouseover", function(e) {
+         tooltip.textContent = stateName;
+         tooltip.style.opacity = '1';
+         tooltip.style.left = (e.pageX + 10) + 'px';
+         tooltip.style.top = (e.pageY + 10) + 'px';
+         this.classList.add("active");
+       });
+       
+       path.addEventListener("mousemove", function(e) {
+         tooltip.style.left = (e.pageX + 10) + 'px';
+         tooltip.style.top = (e.pageY + 10) + 'px';
+       });
+       
+       path.addEventListener("mouseout", function() {
+         tooltip.style.opacity = '0';
+         this.classList.remove("active");
+       });
+       
+       // Add click handler for states with electronic will legislation
+       if (eWillStates.has(stateId) || otherDocsStates.has(stateId)) {
+         path.style.cursor = "pointer";
+         
+         path.addEventListener("click", function() {
+           // Get the state statute information
+           const stateInfo = stateStatutes[stateId];
+           
+           // Update the modal with state information
+           modalTitle.textContent = stateName;
+           modalDescription.textContent = stateInfo.description;
+           statuteLink.href = stateInfo.url;
+           statuteLink.textContent = `View ${stateInfo.statute}`;
+           
+           // Display the modal
+           modal.style.display = "block";
+         });
+       }
+     });
+     
+     // Handle DC special case
+     const dcElement = document.getElementById("DC");
+     if (dcElement) {
+       // Calculate the points of a uniform five-point star
+       const center = { x: 878.18, y: 230 };
+       const outerRadius = 7;
+       const innerRadius = outerRadius * 0.4;
+       
+       let dcStarPath = `M${center.x},${center.y - outerRadius} `;
+       
+       for (let i = 0; i < 5; i++) {
+         // Outer point
+         const outerAngle = (i * 72 - 90) * Math.PI / 180;
+         const outerX = center.x + outerRadius * Math.cos(outerAngle);
+         const outerY = center.y + outerRadius * Math.sin(outerAngle);
+         
+         // Next inner point
+         const innerAngle = ((i * 72 + 36) - 90) * Math.PI / 180;
+         const innerX = center.x + innerRadius * Math.cos(innerAngle);
+         const innerY = center.y + innerRadius * Math.sin(innerAngle);
+         
+         // Add line to inner point
+         dcStarPath += `L${innerX},${innerY} `;
+         
+         // If not the last point, add line to next outer point
+         if (i < 4) {
+           const nextOuterAngle = ((i + 1) * 72 - 90) * Math.PI / 180;
+           const nextOuterX = center.x + outerRadius * Math.cos(nextOuterAngle);
+           const nextOuterY = center.y + outerRadius * Math.sin(nextOuterAngle);
+           dcStarPath += `L${nextOuterX},${nextOuterY} `;
+         }
+       }
+       
+       dcStarPath += "Z"; // Close the path
+       
+       // Set DC element properties
+       dcElement.setAttribute("d", dcStarPath);
+       dcElement.classList.add("highlight");
+       dcElement.style.display = "inline";
+       dcElement.style.cursor = "pointer";
+       
+       // Add hover behavior for DC
+       dcElement.addEventListener("mouseover", function(e) {
+         tooltip.textContent = "District of Columbia";
+         tooltip.style.opacity = '1';
+         tooltip.style.left = (e.pageX + 10) + 'px';
+         tooltip.style.top = (e.pageY + 10) + 'px';
+         this.classList.add("active");
+       });
+       
+       dcElement.addEventListener("mousemove", function(e) {
+         tooltip.style.left = (e.pageX + 10) + 'px';
+         tooltip.style.top = (e.pageY + 10) + 'px';
+       });
+       
+       dcElement.addEventListener("mouseout", function() {
+         tooltip.style.opacity = '0';
+         this.classList.remove("active");
+       });
+       
+       // Add click handler for DC
+       dcElement.addEventListener("click", function() {
+         const stateId = "DC";
+         const stateInfo = stateStatutes[stateId];
+         
+         modalTitle.textContent = "District of Columbia";
+         modalDescription.textContent = stateInfo.description;
+         statuteLink.href = stateInfo.url;
+         statuteLink.textContent = `View ${stateInfo.statute}`;
+         
+         modal.style.display = "block";
+       });
+       
+       // Create overlay group for DC star
+       const ns = "http://www.w3.org/2000/svg";
+       const svgMap = document.querySelector("svg");
+       let overlay = document.getElementById("overlay");
+       if (!overlay) {
+         overlay = document.createElementNS(ns, "g");
+         overlay.setAttribute("id", "overlay");
+         svgMap.appendChild(overlay);
+       }
+       
+       // Clone DC element
+       const dcClone = dcElement.cloneNode(true);
+       dcClone.id = "DC-star";
+       
+       // Add hover behavior for DC clone
+       dcClone.addEventListener("mouseover", function(e) {
+         tooltip.textContent = "District of Columbia";
+         tooltip.style.opacity = '1';
+         tooltip.style.left = (e.pageX + 10) + 'px';
+         tooltip.style.top = (e.pageY + 10) + 'px';
+         dcElement.classList.add("active");
+       });
+       
+       dcClone.addEventListener("mousemove", function(e) {
+         tooltip.style.left = (e.pageX + 10) + 'px';
+         tooltip.style.top = (e.pageY + 10) + 'px';
+       });
+       
+       dcClone.addEventListener("mouseout", function() {
+         tooltip.style.opacity = '0';
+         dcElement.classList.remove("active");
+       });
+       
+       // Add click handler to DC clone
+       dcClone.addEventListener("click", function() {
+         const stateId = "DC";
+         const stateInfo = stateStatutes[stateId];
+         
+         modalTitle.textContent = "District of Columbia";
+         modalDescription.textContent = stateInfo.description;
+         statuteLink.href = stateInfo.url;
+         statuteLink.textContent = `View ${stateInfo.statute}`;
+         
+         modal.style.display = "block";
+       });
+       
+       // Add clone to overlay
+       overlay.appendChild(dcClone);
+       
+       // Ensure overlay is at the top
+       svgMap.appendChild(overlay);
+     }
+   });
+   </script>
 <!-- 100% privacy-first analytics -->
 <script async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
 </body>
