@@ -187,6 +187,25 @@
 .statute-link:hover {
   background-color: #005a9c;
 }
+/* Styling for multiple statute links */
+.statute-links {
+  margin-top: 15px;
+}
+
+.statute-links a {
+  display: block;
+  margin-bottom: 10px;
+  padding: 8px 16px;
+  background-color: #007acc;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.statute-links a:hover {
+  background-color: #005a9c;
+}
   </style>
 </head>
 <body>
@@ -205,7 +224,7 @@
      </div>
      <div class="modal-body" id="modalBody">
        <p id="modalDescription">Information about the state's electronic will legislation will appear here.</p>
-       <a id="statuteLink" href="#" target="_blank" class="statute-link">View Statute</a>
+       <div id="statuteLinks" class="statute-links"></div>
      </div>
    </div>
  </div>
@@ -661,10 +680,8 @@
      "CO": {
        authorizes: "both",
        statute: ["Colo. Rev. Stat. § 15-11-1301", "Colo. Rev. Stat. § 15-25-101"],
-       url: ["https://casetext.com/statute/colorado-revised-statutes/title-15-probate-trusts-and-fiduciaries/colorado-probate-code/article-11-intestate-succession-and-wills/part-13-colorado-uniform-electronic-wills-act/section-15-11-1301-short-title", 
-       "https://casetext.com/statute/colorado-revised-statutes/title-15-probate-trusts-and-fiduciaries/non-testamentary-electronic-estate-planning-documents/article-24-uniform-non-testamentary-electronic-estate-planning-documents-act/part-1-general-provisions-and-definitions/section-15-24-101-short-title"],
-       urlLabel: ["View Uniform Electronic Wills Act", 
-               "View Uniform Non-Testamentary Estate Planning Documents Act"],
+       url: ["https://casetext.com/statute/colorado-revised-statutes/title-15-probate-trusts-and-fiduciaries/colorado-probate-code/article-11-intestate-succession-and-wills/part-13-colorado-uniform-electronic-wills-act/section-15-11-1301-short-title", "https://casetext.com/statute/colorado-revised-statutes/title-15-probate-trusts-and-fiduciaries/non-testamentary-electronic-estate-planning-documents/article-24-uniform-non-testamentary-electronic-estate-planning-documents-act/part-1-general-provisions-and-definitions/section-15-24-101-short-title"],
+       urlLabel: ["View Uniform Electronic Wills Act", "View Uniform Non-Testamentary Estate Planning Documents Act"],
        description: "Colorado has adopted the Uniform Electronic Wills Act and the Uniform Non-Testamentary Estate Planning Documents Act."
      },
      "DC": {
@@ -720,8 +737,7 @@
       statute: ["N.D. Cent. Code § 30.1-37-02", "N.D. Cent. Code § 59-22-01"],
       url: ["https://casetext.com/statute/north-dakota-century-code/title-301-uniform-probate-code/chapter-301-37-uniform-electronic-wills-act/section-301-37-02-law-applicable-to-electronic-will-principles-of-equity", 
           "https://ndlegis.gov/assembly/69-2025/regular/documents/25-0258-03000.pdf"],
-      urlLabel: ["View Uniform Electronic Wills Act", 
-               "View Uniform Electronic Estate Planning Documents Act"],
+      urlLabel: ["View Uniform Electronic Wills Act", "View Uniform Electronic Estate Planning Documents Act"],
       description: "North Dakota has adopted both the Uniform Electronic Wills Act and the Uniform Electronic Estate Planning Documents Act."
      },
      "OK": {
@@ -824,7 +840,7 @@
      const modal = document.getElementById("stateModal");
      const modalTitle = document.getElementById("modalTitle");
      const modalDescription = document.getElementById("modalDescription");
-     const statuteLink = document.getElementById("statuteLink");
+     const statuteLinks = document.getElementById("statuteLinks");
      const closeBtn = document.querySelector(".close");
      
      // Setup modal close behavior
@@ -896,8 +912,30 @@
            // Update the modal with state information
            modalTitle.textContent = stateName;
            modalDescription.textContent = stateInfo.description;
-           statuteLink.href = stateInfo.url;
-           statuteLink.textContent = `View ${stateInfo.statute}`;
+           
+           // Clear any existing statute links
+           statuteLinks.innerHTML = '';
+           
+           // Handle different types of statute links
+           if (Array.isArray(stateInfo.statute)) {
+             // Multiple statutes
+             stateInfo.statute.forEach((stat, index) => {
+               const link = document.createElement('a');
+               link.href = stateInfo.url[index];
+               link.textContent = stateInfo.urlLabel ? stateInfo.urlLabel[index] : `View ${stat}`;
+               link.className = 'statute-link';
+               link.target = '_blank';
+               statuteLinks.appendChild(link);
+             });
+           } else {
+             // Single statute
+             const link = document.createElement('a');
+             link.href = stateInfo.url;
+             link.textContent = `View ${stateInfo.statute}`;
+             link.className = 'statute-link';
+             link.target = '_blank';
+             statuteLinks.appendChild(link);
+           }
            
            // Display the modal
            modal.style.display = "block";
@@ -972,8 +1010,17 @@
          
          modalTitle.textContent = "District of Columbia";
          modalDescription.textContent = stateInfo.description;
-         statuteLink.href = stateInfo.url;
-         statuteLink.textContent = `View ${stateInfo.statute}`;
+         
+         // Clear any existing statute links
+         statuteLinks.innerHTML = '';
+         
+         // Create link for DC
+         const link = document.createElement('a');
+         link.href = stateInfo.url;
+         link.textContent = `View ${stateInfo.statute}`;
+         link.className = 'statute-link';
+         link.target = '_blank';
+         statuteLinks.appendChild(link);
          
          modal.style.display = "block";
        });
@@ -1018,8 +1065,17 @@
          
          modalTitle.textContent = "District of Columbia";
          modalDescription.textContent = stateInfo.description;
-         statuteLink.href = stateInfo.url;
-         statuteLink.textContent = `View ${stateInfo.statute}`;
+         
+         // Clear any existing statute links
+         statuteLinks.innerHTML = '';
+         
+         // Create link for DC
+         const link = document.createElement('a');
+         link.href = stateInfo.url;
+         link.textContent = `View ${stateInfo.statute}`;
+         link.className = 'statute-link';
+         link.target = '_blank';
+         statuteLinks.appendChild(link);
          
          modal.style.display = "block";
        });
