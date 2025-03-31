@@ -1189,66 +1189,39 @@ overlay.addEventListener("click", function() {
          modal.style.display = "block";
        });
        
-       // Create overlay group for DC star
-       const ns = "http://www.w3.org/2000/svg";
-       const svgMap = document.querySelector("svg");
-       let overlay = document.getElementById("overlay");
-       if (!overlay) {
-         overlay = document.createElementNS(ns, "g");
-         overlay.setAttribute("id", "overlay");
-         svgMap.appendChild(overlay);
-       }
-       
-       // Clone DC element
-       const dcClone = dcElement.cloneNode(true);
-       dcClone.id = "DC-star";
-       
-       // Add hover behavior for DC clone
-       dcClone.addEventListener("mouseover", function(e) {
-         tooltip.textContent = "District of Columbia";
-         tooltip.style.opacity = '1';
-         tooltip.style.left = (e.pageX + 10) + 'px';
-         tooltip.style.top = (e.pageY + 10) + 'px';
-         dcElement.classList.add("active");
-       });
-       
-       dcClone.addEventListener("mousemove", function(e) {
-         tooltip.style.left = (e.pageX + 10) + 'px';
-         tooltip.style.top = (e.pageY + 10) + 'px';
-       });
-       
-       dcClone.addEventListener("mouseout", function() {
-         tooltip.style.opacity = '0';
-         dcElement.classList.remove("active");
-       });
-       
-       // Add click handler to DC clone
-       dcClone.addEventListener("click", function() {
-         const stateId = "DC";
-         const stateInfo = stateStatutes[stateId];
-         
-         modalTitle.textContent = "District of Columbia";
-         modalDescription.textContent = stateInfo.description;
-         
-         // Clear any existing statute links
-         statuteLinks.innerHTML = '';
-         
-         // Create link for DC
-         const link = document.createElement('a');
-         link.href = stateInfo.url;
-         link.textContent = `View ${stateInfo.statute}`;
-         link.className = 'statute-link';
-         link.target = '_blank';
-         statuteLinks.appendChild(link);
-         
-         modal.style.display = "block";
-       });
-       
-       // Add clone to overlay
-       overlay.appendChild(dcClone);
-       
-       // Ensure overlay is at the top
-       svgMap.appendChild(overlay);
+// Remove the existing DC element from its current position
+const dcParent = dcElement.parentNode;
+if (dcParent) {
+  dcParent.removeChild(dcElement);
+}
+
+// Create an overlay group that will sit on top of all other states
+const ns = "http://www.w3.org/2000/svg";
+const svgMap = document.querySelector("svg");
+
+// Create a new group element for the DC star
+const dcGroup = document.createElementNS(ns, "g");
+dcGroup.setAttribute("id", "dc-overlay");
+dcGroup.setAttribute("style", "pointer-events: all;");
+
+// Append the DC element to this new group
+dcGroup.appendChild(dcElement);
+
+// Set z-index to ensure it's on top
+dcElement.style.zIndex = "1000";
+dcElement.style.position = "relative";
+
+// Make sure the hover and active styles are more prominent
+dcElement.style.strokeWidth = "2";
+
+// Append the group to the SVG at the end to ensure it's on top of all other elements
+svgMap.appendChild(dcGroup);
+
+// Ensure the DC element is visible and properly styled
+dcElement.style.display = "inline";
+dcElement.style.fill = "#007acc";
+dcElement.style.stroke = "#333";
+dcElement.style.cursor = "pointer";
      }
    });
    </script>
