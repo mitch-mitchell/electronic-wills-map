@@ -3,6 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <!-- Open Graph / Facebook Meta Tags -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://electronicwills.org/">
+  <meta property="og:title" content="States with Electronic Will Legislation">
+  <meta property="og:description" content="Interactive map showing which US states have adopted electronic will legislation and electronic estate planning documents.">
+  <meta property="og:image" content="https://electronicwills/og-image.jpg">
+
+  <!-- Twitter Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://electroncwills.org/">
+  <meta name="twitter:title" content="States with Electronic Will Legislation">
+  <meta name="twitter:description" content="Interactive map showing which US states have adopted electronic will legislation and electronic estate planning documents.">
+  <meta name="twitter:image" content="https://electronicwills.org/og-image.jpg">
   <title>States with Electronic Will Legislation</title>
   <style>
    /* Title styling */
@@ -1227,5 +1240,139 @@ dcElement.style.cursor = "pointer";
    </script>
 <!-- 100% privacy-first analytics -->
 <script async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+<!-- Thumbnail Generator Script -->
+<script>
+  // Function to generate a thumbnail image of the map for social sharing
+  function generateMapThumbnail() {
+    // Get the SVG element
+    const svgMap = document.querySelector('svg');
+    
+    // Clone the SVG to avoid modifying the original
+    const svgClone = svgMap.cloneNode(true);
+    
+    // Make sure all states have proper styling
+    const paths = svgClone.querySelectorAll('path');
+    paths.forEach(path => {
+      const stateId = path.id?.toUpperCase();
+      
+      // Set the fill based on state status
+      if (path.classList.contains('highlight')) {
+        path.setAttribute('fill', '#007acc'); // Blue for e-will states
+      } else if (path.classList.contains('other-docs-highlight')) {
+        path.setAttribute('fill', '#44aa44'); // Green for both
+      } else {
+        path.setAttribute('fill', '#e0e0e0'); // Gray for states without
+      }
+      
+      // Ensure proper stroke
+      path.setAttribute('stroke', '#333');
+      path.setAttribute('stroke-width', '1');
+    });
+    
+    // Add a title directly to the SVG
+    const titleText = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    titleText.setAttribute("x", "500");
+    titleText.setAttribute("y", "30");
+    titleText.setAttribute("text-anchor", "middle");
+    titleText.setAttribute("font-size", "24");
+    titleText.setAttribute("font-weight", "bold");
+    titleText.setAttribute("font-family", "sans-serif");
+    titleText.textContent = "States with Electronic Will Legislation";
+    svgClone.appendChild(titleText);
+    
+    // Add a legend
+    const legendY = 560;
+    
+    // Legend background
+    const legendBg = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+    legendBg.setAttribute("x", "250");
+    legendBg.setAttribute("y", legendY - 20);
+    legendBg.setAttribute("width", "500");
+    legendBg.setAttribute("height", "40");
+    legendBg.setAttribute("fill", "white");
+    legendBg.setAttribute("opacity", "0.8");
+    legendBg.setAttribute("rx", "5");
+    svgClone.appendChild(legendBg);
+    
+    // Blue box
+    const blueBox = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+    blueBox.setAttribute("x", "270");
+    blueBox.setAttribute("y", legendY - 10);
+    blueBox.setAttribute("width", "20");
+    blueBox.setAttribute("height", "20");
+    blueBox.setAttribute("fill", "#007acc");
+    svgClone.appendChild(blueBox);
+    
+    // Blue text
+    const blueText = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    blueText.setAttribute("x", "300");
+    blueText.setAttribute("y", legendY + 5);
+    blueText.setAttribute("font-size", "14");
+    blueText.setAttribute("font-family", "sans-serif");
+    blueText.textContent = "Authorizes electronic wills";
+    svgClone.appendChild(blueText);
+    
+    // Green box
+    const greenBox = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+    greenBox.setAttribute("x", "500");
+    greenBox.setAttribute("y", legendY - 10);
+    greenBox.setAttribute("width", "20");
+    greenBox.setAttribute("height", "20");
+    greenBox.setAttribute("fill", "#44aa44");
+    svgClone.appendChild(greenBox);
+    
+    // Green text
+    const greenText = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    greenText.setAttribute("x", "530");
+    greenText.setAttribute("y", legendY + 5);
+    greenText.setAttribute("font-size", "14");
+    greenText.setAttribute("font-family", "sans-serif");
+    greenText.textContent = "E-wills & electronic estate planning docs";
+    svgClone.appendChild(greenText);
+    
+    // Set view box and dimensions
+    svgClone.setAttribute("viewBox", "0 0 1000 589");
+    svgClone.setAttribute("width", "1200");
+    svgClone.setAttribute("height", "630"); // OG image recommended size
+    
+    // Convert SVG to string
+    const svgData = new XMLSerializer().serializeToString(svgClone);
+    
+    // Create a canvas to draw the image
+    const canvas = document.createElement('canvas');
+    canvas.width = 1200;
+    canvas.height = 630;
+    const ctx = canvas.getContext('2d');
+    
+    // Fill background
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    
+    // Create an image from the SVG
+    const img = new Image();
+    img.onload = function() {
+      // Draw the image to the canvas
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      
+      // Convert canvas to an image
+      const imageUrl = canvas.toDataURL('image/jpeg', 0.9);
+      
+      // Display the image or download it
+      const link = document.createElement('a');
+      link.href = imageUrl;
+      link.download = 'og-image.jpg';
+      link.click();
+    };
+    
+    // Load SVG into the image
+    img.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgData)));
+  }
+  
+  // Uncomment this to run the function automatically when script loads
+  // window.addEventListener('load', function() {
+  //   // Wait a bit for the map to initialize
+  //   setTimeout(generateMapThumbnail, 2000);
+  // });
+  </script>
 </body>
 </html>
