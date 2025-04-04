@@ -1425,6 +1425,54 @@ function generateMapThumbnail() {
   
   console.log("Started image loading process...");
 }
+function diagnoseThumbnail() {
+  console.log("Starting diagnosis...");
+  
+  // First log the stateStatutes object
+  console.log("State statutes object:", window.stateStatutes);
+  
+  // Check if DC exists in the statutes
+  if (window.stateStatutes && "DC" in window.stateStatutes) {
+    console.log("DC statute info:", window.stateStatutes["DC"]);
+  } else {
+    console.log("DC not found in statutes");
+  }
+  
+  // Get the SVG element
+  const svgMap = document.querySelector('svg');
+  if (!svgMap) {
+    console.error("SVG map not found");
+    return;
+  }
+  
+  // Check which states have path elements
+  const paths = svgMap.querySelectorAll('path[id]');
+  console.log(`Found ${paths.length} path elements with IDs`);
+  
+  // Check if state IDs match the statutes object
+  paths.forEach(path => {
+    const stateId = path.getAttribute('id').toUpperCase();
+    if (window.stateStatutes && stateId in window.stateStatutes) {
+      console.log(`State ${stateId} found in statutes: ${window.stateStatutes[stateId].authorizes}`);
+    } else {
+      console.log(`State ${stateId} not found in statutes`);
+    }
+  });
+  
+  // Check if DC element exists in a different form
+  const dcElement = document.getElementById("DC");
+  if (dcElement) {
+    console.log("DC element found with ID attribute");
+  } else {
+    console.log("DC element not found with ID attribute");
+  }
+  
+  // Try to find any element that might be DC
+  const possibleDCElements = document.querySelectorAll('*[data-id="DC"], *[data-name="District of Columbia"]');
+  console.log(`Found ${possibleDCElements.length} possible DC elements with data attributes`);
+  
+  console.log("Diagnosis complete");
+}
 </script>
 </body>
 </html>
