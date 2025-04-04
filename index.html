@@ -1244,24 +1244,43 @@ dcElement.style.cursor = "pointer";
 // Function to generate a thumbnail image of the map for social sharing
 <script>
 function generateMapThumbnail() {
+  console.log("Starting thumbnail generation...");
+  
+  // First check if window.stateStatutes is available
+  if (!window.stateStatutes) {
+    console.error("State statutes data not available yet");
+    return;
+  }
+
   // Get the SVG element
   const svgMap = document.querySelector('svg');
+  if (!svgMap) {
+    console.error("SVG map not found");
+    return;
+  }
   
+  console.log("Creating SVG clone...");
   // Clone the SVG to avoid modifying the original
   const svgClone = svgMap.cloneNode(true);
   
   // Make sure all states have proper styling
   const paths = svgClone.querySelectorAll('path');
+  console.log(`Found ${paths.length} paths in the SVG`);
   
   // Apply correct fill colors based on the global stateStatutes object
   paths.forEach(path => {
-    const stateId = path.getAttribute('id')?.toUpperCase();
+    const stateId = path.getAttribute('id');
+    if (!stateId) return;
     
-    if (stateId && window.stateStatutes && window.stateStatutes[stateId]) {
-      if (window.stateStatutes[stateId].authorizes === "both") {
+    const upperStateId = stateId.toUpperCase();
+    
+    if (window.stateStatutes[upperStateId]) {
+      if (window.stateStatutes[upperStateId].authorizes === "both") {
         path.setAttribute('fill', '#44aa44'); // Green for both
+        console.log(`Set ${upperStateId} to green (both)`);
       } else {
         path.setAttribute('fill', '#007acc'); // Blue for e-wills
+        console.log(`Set ${upperStateId} to blue (e-wills)`);
       }
     } else {
       path.setAttribute('fill', '#e0e0e0'); // Gray for states without
@@ -1351,6 +1370,7 @@ function generateMapThumbnail() {
   svgClone.setAttribute("width", "1200");
   svgClone.setAttribute("height", "630"); // OG image recommended size
   
+  console.log("Converting SVG to string...");
   // Convert SVG to string
   const svgData = new XMLSerializer().serializeToString(svgClone);
   
@@ -1364,31 +1384,39 @@ function generateMapThumbnail() {
   ctx.fillStyle = '#ffffff';
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   
+  console.log("Creating image from SVG...");
   // Create an image from the SVG
   const img = new Image();
   img.onload = function() {
+    console.log("Drawing image to canvas...");
     // Draw the image to the canvas
     ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
     
+    console.log("Converting canvas to JPEG...");
     // Convert canvas to an image
     const imageUrl = canvas.toDataURL('image/jpeg', 0.9);
     
+    console.log("Creating download link...");
     // Display the image or download it
     const link = document.createElement('a');
     link.href = imageUrl;
     link.download = 'og-image.jpg';
     link.click();
+    
+    console.log("Thumbnail generation complete!");
+  };
+  
+  img.onerror = function(e) {
+    console.error("Error loading SVG into image:", e);
   };
   
   // Load SVG into the image
-  img.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgData)));
+  const svgBlob = new Blob([svgData], {type: 'image/svg+xml'});
+  const url = URL.createObjectURL(svgBlob);
+  img.src = url;
+  
+  console.log("Started image loading process...");
 }
-
-// Uncomment this to run the function automatically when script loads
-// window.addEventListener('load', function() {
-//   // Wait a bit for the map to initialize
-//   setTimeout(generateMapThumbnail, 2000);
-// });
 </script>
 </body>
 </html>
