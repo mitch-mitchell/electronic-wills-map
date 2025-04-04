@@ -1272,14 +1272,18 @@ function generateMapThumbnail() {
     path.setAttribute('stroke-width', '1');
   });
   
-  // Add a title directly to the SVG
+  // Add a plain text title directly to the SVG
   const titleText = document.createElementNS("http://www.w3.org/2000/svg", "text");
   titleText.setAttribute("x", "500");
   titleText.setAttribute("y", "40");
   titleText.setAttribute("text-anchor", "middle");
-  titleText.setAttribute("font-size", "28");
+  titleText.setAttribute("font-size", "32"); // Increased size for better visibility
   titleText.setAttribute("font-weight", "bold");
   titleText.setAttribute("font-family", "sans-serif");
+  titleText.setAttribute("fill", "#333"); // Darker text for better readability
+  
+  // Add text shadow for better legibility against the map background
+  titleText.setAttribute("filter", "drop-shadow(0px 0px 3px rgba(255, 255, 255, 0.8))");
   titleText.textContent = "States with Electronic Will Legislation";
   svgClone.appendChild(titleText);
   
