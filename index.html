@@ -1260,7 +1260,7 @@ function generateMapThumbnail() {
     if (stateId && window.stateStatutes && window.stateStatutes[stateId]) {
       if (window.stateStatutes[stateId].authorizes === "both") {
         path.setAttribute('fill', '#44aa44'); // Green for both
-      } else {
+      } else if (window.stateStatutes[stateId].authorizes === "e-wills") {
         path.setAttribute('fill', '#007acc'); // Blue for e-wills
       }
     } else {
@@ -1271,6 +1271,74 @@ function generateMapThumbnail() {
     path.setAttribute('stroke', '#333');
     path.setAttribute('stroke-width', '1');
   });
+  
+  // Add special handling for DC
+  // Look for DC element or create one if not found
+  let dcElement = svgClone.getElementById("DC");
+  if (!dcElement) {
+    // Create a star shape for DC
+    const dcStar = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    dcStar.setAttribute("id", "DC");
+    
+    // Star coordinates (centered around 878,230)
+    const center = { x: 878.18, y: 230 };
+    const outerRadius = 7;
+    const innerRadius = outerRadius * 0.4;
+    
+    let dcStarPath = `M${center.x},${center.y - outerRadius} `;
+    
+    for (let i = 0; i < 5; i++) {
+      // Outer point
+      const outerAngle = (i * 72 - 90) * Math.PI / 180;
+      const outerX = center.x + outerRadius * Math.cos(outerAngle);
+      const outerY = center.y + outerRadius * Math.sin(outerAngle);
+      
+      // Next inner point
+      const innerAngle = ((i * 72 + 36) - 90) * Math.PI / 180;
+      const innerX = center.x + innerRadius * Math.cos(innerAngle);
+      const innerY = center.y + innerRadius * Math.sin(innerAngle);
+      
+      // Add line to inner point
+      dcStarPath += `L${innerX},${innerY} `;
+      
+      // If not the last point, add line to next outer point
+      if (i < 4) {
+        const nextOuterAngle = ((i + 1) * 72 - 90) * Math.PI / 180;
+        const nextOuterX = center.x + outerRadius * Math.cos(nextOuterAngle);
+        const nextOuterY = center.y + outerRadius * Math.sin(nextOuterAngle);
+        dcStarPath += `L${nextOuterX},${nextOuterY} `;
+      }
+    }
+    
+    dcStarPath += "Z"; // Close the path
+    dcStar.setAttribute("d", dcStarPath);
+    dcStar.setAttribute("stroke", "#333");
+    dcStar.setAttribute("stroke-width", "1");
+    
+    // Apply the appropriate fill color
+    if (window.stateStatutes && window.stateStatutes["DC"]) {
+      if (window.stateStatutes["DC"].authorizes === "both") {
+        dcStar.setAttribute("fill", "#44aa44");
+      } else if (window.stateStatutes["DC"].authorizes === "e-wills") {
+        dcStar.setAttribute("fill", "#007acc");
+      }
+    } else {
+      dcStar.setAttribute("fill", "#e0e0e0");
+    }
+    
+    svgClone.appendChild(dcStar);
+  } else {
+    // If DC element exists, just make sure it has the right fill
+    if (window.stateStatutes && window.stateStatutes["DC"]) {
+      if (window.stateStatutes["DC"].authorizes === "both") {
+        dcElement.setAttribute("fill", "#44aa44");
+      } else if (window.stateStatutes["DC"].authorizes === "e-wills") {
+        dcElement.setAttribute("fill", "#007acc");
+      }
+    } else {
+      dcElement.setAttribute("fill", "#e0e0e0");
+    }
+  }
   
   // Add a white background behind the title with rounded corners matching the legend
   const titleBg = document.createElementNS("http://www.w3.org/2000/svg", "rect");
@@ -1353,36 +1421,6 @@ function generateMapThumbnail() {
   
   // Convert SVG to string
   const svgData = new XMLSerializer().serializeToString(svgClone);
-  
-  // Create a canvas to draw the image
-  const canvas = document.createElement('canvas');
-  canvas.width = 1200;
-  canvas.height = 630;
-  const ctx = canvas.getContext('2d');
-  
-  // Fill background
-  ctx.fillStyle = '#ffffff';
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-  
-  // Create an image from the SVG
-  const img = new Image();
-  img.onload = function() {
-    // Draw the image to the canvas
-    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-    
-    // Convert canvas to an image
-    const imageUrl = canvas.toDataURL('image/jpeg', 0.9);
-    
-    // Display the image or download it
-    const link = document.createElement('a');
-    link.href = imageUrl;
-    link.download = 'og-image.jpg';
-    link.click();
-  };
-  
-  // Load SVG into the image
-  img.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgData)));
-}
 
 // Uncomment this to run the function automatically when script loads
 // window.addEventListener('load', function() {
