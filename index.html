@@ -1243,6 +1243,7 @@ dcElement.style.cursor = "pointer";
 
 // Function to generate a thumbnail image of the map for social sharing
 <script>
+// Function to generate a thumbnail image of the map for social sharing
 function generateMapThumbnail() {
   // Get the SVG element
   const svgMap = document.querySelector('svg');
@@ -1272,30 +1273,29 @@ function generateMapThumbnail() {
     path.setAttribute('stroke-width', '1');
   });
   
-  // Add a simple clean title - just black text, no effects
-  const titleText = document.createElementNS("http://www.w3.org/2000/svg", "text");
-  titleText.setAttribute("x", "500");
-  titleText.setAttribute("y", "40");
-  titleText.setAttribute("text-anchor", "middle");
-  titleText.setAttribute("font-size", "30"); // Medium size
-  titleText.setAttribute("font-weight", "bold");
-  titleText.setAttribute("font-family", "Arial, Helvetica, sans-serif"); // Web-safe fonts
-  titleText.setAttribute("fill", "#000000"); // Pure black
-  // No filters, shadows, or effects
-  titleText.textContent = "States with Electronic Will Legislation";
-  svgClone.appendChild(titleText);
-  
-  // Add a simple white background behind the title for better readability if needed
+  // Add a simple white background behind the title for better readability
   const titleBg = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-  titleBg.setAttribute("x", "150");
+  titleBg.setAttribute("x", "200");
   titleBg.setAttribute("y", "15");
-  titleBg.setAttribute("width", "700");
+  titleBg.setAttribute("width", "600");
   titleBg.setAttribute("height", "40");
   titleBg.setAttribute("fill", "#ffffff");
-  titleBg.setAttribute("rx", "3"); // Slightly rounded corners
+  titleBg.setAttribute("rx", "2"); // Very slight rounded corners
+  
+  // Add a clean, simple title - just black text, no effects
+  const titleText = document.createElementNS("http://www.w3.org/2000/svg", "text");
+  titleText.setAttribute("x", "500");
+  titleText.setAttribute("y", "42");
+  titleText.setAttribute("text-anchor", "middle");
+  titleText.setAttribute("font-size", "24"); // Medium size, slightly smaller than before
+  titleText.setAttribute("font-weight", "bold");
+  titleText.setAttribute("font-family", "Arial, sans-serif"); // Simple web-safe font
+  titleText.setAttribute("fill", "#000000"); // Pure black
+  titleText.textContent = "States with Electronic Will Legislation";
   
   // Insert the background before the text
-  svgClone.insertBefore(titleBg, titleText);
+  svgClone.appendChild(titleBg);
+  svgClone.appendChild(titleText);
   
   // Add a legend
   const legendY = 560;
