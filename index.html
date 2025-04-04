@@ -1263,25 +1263,40 @@ function generateMapThumbnail() {
   // Clone the SVG to avoid modifying the original
   const svgClone = svgMap.cloneNode(true);
   
+  // Create sets from the statute object for easier checking
+  const eWillStates = new Set(
+    Object.keys(window.stateStatutes).filter(state => 
+      window.stateStatutes[state].authorizes === "e-wills"
+    )
+  );
+  
+  const bothStates = new Set(
+    Object.keys(window.stateStatutes).filter(state => 
+      window.stateStatutes[state].authorizes === "both"
+    )
+  );
+  
+  console.log("E-will states:", Array.from(eWillStates).join(", "));
+  console.log("Both states:", Array.from(bothStates).join(", "));
+  
   // Make sure all states have proper styling
   const paths = svgClone.querySelectorAll('path');
   console.log(`Found ${paths.length} paths in the SVG`);
   
-  // Apply correct fill colors based on the global stateStatutes object
+  // Apply fill colors directly
   paths.forEach(path => {
     const stateId = path.getAttribute('id');
     if (!stateId) return;
     
     const upperStateId = stateId.toUpperCase();
     
-    if (window.stateStatutes[upperStateId]) {
-      if (window.stateStatutes[upperStateId].authorizes === "both") {
-        path.setAttribute('fill', '#44aa44'); // Green for both
-        console.log(`Set ${upperStateId} to green (both)`);
-      } else {
-        path.setAttribute('fill', '#007acc'); // Blue for e-wills
-        console.log(`Set ${upperStateId} to blue (e-wills)`);
-      }
+    // Apply fill directly based on state type
+    if (bothStates.has(upperStateId)) {
+      path.setAttribute('fill', '#44aa44'); // Green for both
+      console.log(`Set ${upperStateId} to green (both)`);
+    } else if (eWillStates.has(upperStateId)) {
+      path.setAttribute('fill', '#007acc'); // Blue for e-wills only
+      console.log(`Set ${upperStateId} to blue (e-wills)`);
     } else {
       path.setAttribute('fill', '#e0e0e0'); // Gray for states without
     }
@@ -1291,34 +1306,76 @@ function generateMapThumbnail() {
     path.setAttribute('stroke-width', '1');
   });
   
-  // Add a white background behind the title with rounded corners matching the legend
+  // Manually add DC if needed
+  if (bothStates.has("DC") || eWillStates.has("DC")) {
+    // Calculate the points of a uniform five-point star
+    const center = { x: 878.18, y: 230 };
+    const outerRadius = 7;
+    const innerRadius = outerRadius * 0.4;
+    
+    let dcStarPath = `M${center.x},${center.y - outerRadius} `;
+    
+    for (let i = 0; i < 5; i++) {
+      // Outer point
+      const outerAngle = (i * 72 - 90) * Math.PI / 180;
+      const outerX = center.x + outerRadius * Math.cos(outerAngle);
+      const outerY = center.y + outerRadius * Math.sin(outerAngle);
+      
+      // Next inner point
+      const innerAngle = ((i * 72 + 36) - 90) * Math.PI / 180;
+      const innerX = center.x + innerRadius * Math.cos(innerAngle);
+      const innerY = center.y + innerRadius * Math.sin(innerAngle);
+      
+      dcStarPath += `L${innerX},${innerY} `;
+      
+      if (i < 4) {
+        const nextOuterAngle = ((i + 1) * 72 - 90) * Math.PI / 180;
+        const nextOuterX = center.x + outerRadius * Math.cos(nextOuterAngle);
+        const nextOuterY = center.y + outerRadius * Math.sin(nextOuterAngle);
+        dcStarPath += `L${nextOuterX},${nextOuterY} `;
+      }
+    }
+    
+    dcStarPath += "Z"; // Close the path
+    
+    const dcPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    dcPath.setAttribute("d", dcStarPath);
+    dcPath.setAttribute("fill", bothStates.has("DC") ? "#44aa44" : "#007acc");
+    dcPath.setAttribute("stroke", "#333");
+    dcPath.setAttribute("stroke-width", "1");
+    svgClone.appendChild(dcPath);
+    
+    console.log("Added DC star manually");
+  }
+  
+  // Add a white background behind the title
   const titleBg = document.createElementNS("http://www.w3.org/2000/svg", "rect");
   titleBg.setAttribute("x", "200");
   titleBg.setAttribute("y", "15");
   titleBg.setAttribute("width", "600");
   titleBg.setAttribute("height", "40");
   titleBg.setAttribute("fill", "#ffffff");
-  titleBg.setAttribute("rx", "5"); // Rounded corners matching the legend box
+  titleBg.setAttribute("rx", "5");
   
-  // Add a clean, simple title with the same font size as the main page title (1.2em)
+  // Add title text
   const titleText = document.createElementNS("http://www.w3.org/2000/svg", "text");
   titleText.setAttribute("x", "500");
   titleText.setAttribute("y", "42");
   titleText.setAttribute("text-anchor", "middle");
-  titleText.setAttribute("font-size", "1.2em"); // Match main page title size of 1.2em
+  titleText.setAttribute("font-size", "1.2em");
   titleText.setAttribute("font-weight", "bold");
-  titleText.setAttribute("font-family", "Arial, sans-serif"); // Simple web-safe font
-  titleText.setAttribute("fill", "#000000"); // Pure black
+  titleText.setAttribute("font-family", "Arial, sans-serif");
+  titleText.setAttribute("fill", "#000000");
   titleText.textContent = "States with Electronic Will Legislation";
   
-  // Insert the background before the text
+  // Insert the title elements
   svgClone.appendChild(titleBg);
   svgClone.appendChild(titleText);
   
-  // Add a legend
+  // Add legend
   const legendY = 560;
   
-  // Legend background - make it wider to accommodate text
+  // Legend background
   const legendBg = document.createElementNS("http://www.w3.org/2000/svg", "rect");
   legendBg.setAttribute("x", "200");
   legendBg.setAttribute("y", legendY - 20);
@@ -1329,7 +1386,7 @@ function generateMapThumbnail() {
   legendBg.setAttribute("rx", "5");
   svgClone.appendChild(legendBg);
   
-  // Blue box
+  // Blue box for e-wills
   const blueBox = document.createElementNS("http://www.w3.org/2000/svg", "rect");
   blueBox.setAttribute("x", "220");
   blueBox.setAttribute("y", legendY - 10);
@@ -1347,7 +1404,7 @@ function generateMapThumbnail() {
   blueText.textContent = "Authorizes electronic wills";
   svgClone.appendChild(blueText);
   
-  // Green box
+  // Green box for both
   const greenBox = document.createElementNS("http://www.w3.org/2000/svg", "rect");
   greenBox.setAttribute("x", "420");
   greenBox.setAttribute("y", legendY - 10);
@@ -1365,16 +1422,15 @@ function generateMapThumbnail() {
   greenText.textContent = "E-wills & electronic estate planning documents";
   svgClone.appendChild(greenText);
   
-  // Set view box and dimensions
+  // Set SVG attributes
   svgClone.setAttribute("viewBox", "0 0 1000 589");
   svgClone.setAttribute("width", "1200");
-  svgClone.setAttribute("height", "630"); // OG image recommended size
+  svgClone.setAttribute("height", "630");
   
   console.log("Converting SVG to string...");
-  // Convert SVG to string
   const svgData = new XMLSerializer().serializeToString(svgClone);
   
-  // Create a canvas to draw the image
+  // Create canvas
   const canvas = document.createElement('canvas');
   canvas.width = 1200;
   canvas.height = 630;
@@ -1385,19 +1441,15 @@ function generateMapThumbnail() {
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   
   console.log("Creating image from SVG...");
-  // Create an image from the SVG
   const img = new Image();
   img.onload = function() {
     console.log("Drawing image to canvas...");
-    // Draw the image to the canvas
     ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
     
     console.log("Converting canvas to JPEG...");
-    // Convert canvas to an image
     const imageUrl = canvas.toDataURL('image/jpeg', 0.9);
     
     console.log("Creating download link...");
-    // Display the image or download it
     const link = document.createElement('a');
     link.href = imageUrl;
     link.download = 'og-image.jpg';
@@ -1410,7 +1462,7 @@ function generateMapThumbnail() {
     console.error("Error loading SVG into image:", e);
   };
   
-  // Load SVG into the image
+  // Use Blob for better browser compatibility
   const svgBlob = new Blob([svgData], {type: 'image/svg+xml'});
   const url = URL.createObjectURL(svgBlob);
   img.src = url;
