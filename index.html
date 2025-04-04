@@ -1243,8 +1243,18 @@ dcElement.style.cursor = "pointer";
 
 // Function to generate a thumbnail image of the map for social sharing
 <script>
-function generateMapThumbnail() {
-  console.log("Starting thumbnail generation...");
+function diagnoseThumbnail() {
+  console.log("Starting diagnosis...");
+  
+  // First log the stateStatutes object
+  console.log("State statutes object:", window.stateStatutes);
+  
+  // Check if DC exists in the statutes
+  if (window.stateStatutes && "DC" in window.stateStatutes) {
+    console.log("DC statute info:", window.stateStatutes["DC"]);
+  } else {
+    console.log("DC not found in statutes");
+  }
   
   // Get the SVG element
   const svgMap = document.querySelector('svg');
@@ -1253,177 +1263,33 @@ function generateMapThumbnail() {
     return;
   }
   
-  console.log("Creating SVG clone...");
-  // Clone the SVG to avoid modifying the original
-  const svgClone = svgMap.cloneNode(true);
+  // Check which states have path elements
+  const paths = svgMap.querySelectorAll('path[id]');
+  console.log(`Found ${paths.length} path elements with IDs`);
   
-  // Make sure all states have proper styling
-  const paths = svgClone.querySelectorAll('path');
-  console.log(`Found ${paths.length} paths in the SVG`);
-  
-  // Apply fill colors directly
+  // Check if state IDs match the statutes object
   paths.forEach(path => {
-    const stateId = path.getAttribute('id');
-    if (!stateId) return;
-    
-    // Log the state we're processing
-    console.log(`Processing state: ${stateId}`);
-    
-    // Default fill for states without legislation
-    path.setAttribute('fill', '#e0e0e0');
-    
-    // Check if this state has legislation
-    if (window.stateStatutes && stateId.toUpperCase() in window.stateStatutes) {
-      const stateInfo = window.stateStatutes[stateId.toUpperCase()];
-      
-      // Check the type of legislation
-      if (stateInfo.authorizes === "both") {
-        path.setAttribute('fill', '#44aa44'); // Green for both
-        console.log(`Set ${stateId} to green (both)`);
-      } else if (stateInfo.authorizes === "e-wills") {
-        path.setAttribute('fill', '#007acc'); // Blue for e-wills only
-        console.log(`Set ${stateId} to blue (e-wills)`);
-      }
+    const stateId = path.getAttribute('id').toUpperCase();
+    if (window.stateStatutes && stateId in window.stateStatutes) {
+      console.log(`State ${stateId} found in statutes: ${window.stateStatutes[stateId].authorizes}`);
+    } else {
+      console.log(`State ${stateId} not found in statutes`);
     }
-    
-    // Ensure proper stroke
-    path.setAttribute('stroke', '#333');
-    path.setAttribute('stroke-width', '1');
   });
   
-  // Handle DC separately since it's special in the SVG
-  const dcElement = svgClone.getElementById("DC");
-  if (dcElement && window.stateStatutes && "DC" in window.stateStatutes) {
-    const stateInfo = window.stateStatutes["DC"];
-    if (stateInfo.authorizes === "both") {
-      dcElement.setAttribute('fill', '#44aa44');
-      console.log("Set DC to green (both)");
-    } else if (stateInfo.authorizes === "e-wills") {
-      dcElement.setAttribute('fill', '#007acc');
-      console.log("Set DC to blue (e-wills)");
-    }
+  // Check if DC element exists in a different form
+  const dcElement = document.getElementById("DC");
+  if (dcElement) {
+    console.log("DC element found with ID attribute");
+  } else {
+    console.log("DC element not found with ID attribute");
   }
   
-  // Add a white background behind the title
-  const titleBg = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-  titleBg.setAttribute("x", "200");
-  titleBg.setAttribute("y", "15");
-  titleBg.setAttribute("width", "600");
-  titleBg.setAttribute("height", "40");
-  titleBg.setAttribute("fill", "#ffffff");
-  titleBg.setAttribute("rx", "5");
+  // Try to find any element that might be DC
+  const possibleDCElements = document.querySelectorAll('*[data-id="DC"], *[data-name="District of Columbia"]');
+  console.log(`Found ${possibleDCElements.length} possible DC elements with data attributes`);
   
-  // Add title text
-  const titleText = document.createElementNS("http://www.w3.org/2000/svg", "text");
-  titleText.setAttribute("x", "500");
-  titleText.setAttribute("y", "42");
-  titleText.setAttribute("text-anchor", "middle");
-  titleText.setAttribute("font-size", "1.2em");
-  titleText.setAttribute("font-weight", "bold");
-  titleText.setAttribute("font-family", "Arial, sans-serif");
-  titleText.setAttribute("fill", "#000000");
-  titleText.textContent = "States with Electronic Will Legislation";
-  
-  // Insert the title elements
-  svgClone.appendChild(titleBg);
-  svgClone.appendChild(titleText);
-  
-  // Add legend
-  const legendY = 560;
-  
-  // Legend background
-  const legendBg = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-  legendBg.setAttribute("x", "200");
-  legendBg.setAttribute("y", legendY - 20);
-  legendBg.setAttribute("width", "600");
-  legendBg.setAttribute("height", "40");
-  legendBg.setAttribute("fill", "white");
-  legendBg.setAttribute("opacity", "0.9");
-  legendBg.setAttribute("rx", "5");
-  svgClone.appendChild(legendBg);
-  
-  // Blue box for e-wills
-  const blueBox = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-  blueBox.setAttribute("x", "220");
-  blueBox.setAttribute("y", legendY - 10);
-  blueBox.setAttribute("width", "20");
-  blueBox.setAttribute("height", "20");
-  blueBox.setAttribute("fill", "#007acc");
-  svgClone.appendChild(blueBox);
-  
-  // Blue text
-  const blueText = document.createElementNS("http://www.w3.org/2000/svg", "text");
-  blueText.setAttribute("x", "250");
-  blueText.setAttribute("y", legendY + 5);
-  blueText.setAttribute("font-size", "14");
-  blueText.setAttribute("font-family", "sans-serif");
-  blueText.textContent = "Authorizes electronic wills";
-  svgClone.appendChild(blueText);
-  
-  // Green box for both
-  const greenBox = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-  greenBox.setAttribute("x", "420");
-  greenBox.setAttribute("y", legendY - 10);
-  greenBox.setAttribute("width", "20");
-  greenBox.setAttribute("height", "20");
-  greenBox.setAttribute("fill", "#44aa44");
-  svgClone.appendChild(greenBox);
-  
-  // Green text
-  const greenText = document.createElementNS("http://www.w3.org/2000/svg", "text");
-  greenText.setAttribute("x", "450");
-  greenText.setAttribute("y", legendY + 5);
-  greenText.setAttribute("font-size", "14");
-  greenText.setAttribute("font-family", "sans-serif");
-  greenText.textContent = "E-wills & electronic estate planning documents";
-  svgClone.appendChild(greenText);
-  
-  // Set SVG attributes
-  svgClone.setAttribute("viewBox", "0 0 1000 589");
-  svgClone.setAttribute("width", "1200");
-  svgClone.setAttribute("height", "630");
-  
-  console.log("Converting SVG to string...");
-  const svgData = new XMLSerializer().serializeToString(svgClone);
-  
-  // Create canvas
-  const canvas = document.createElement('canvas');
-  canvas.width = 1200;
-  canvas.height = 630;
-  const ctx = canvas.getContext('2d');
-  
-  // Fill background
-  ctx.fillStyle = '#ffffff';
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-  
-  console.log("Creating image from SVG...");
-  const img = new Image();
-  img.onload = function() {
-    console.log("Drawing image to canvas...");
-    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-    
-    console.log("Converting canvas to JPEG...");
-    const imageUrl = canvas.toDataURL('image/jpeg', 0.9);
-    
-    console.log("Creating download link...");
-    const link = document.createElement('a');
-    link.href = imageUrl;
-    link.download = 'og-image.jpg';
-    link.click();
-    
-    console.log("Thumbnail generation complete!");
-  };
-  
-  img.onerror = function(e) {
-    console.error("Error loading SVG into image:", e);
-  };
-  
-  // Use Blob for better browser compatibility
-  const svgBlob = new Blob([svgData], {type: 'image/svg+xml'});
-  const url = URL.createObjectURL(svgBlob);
-  img.src = url;
-  
-  console.log("Started image loading process...");
+  console.log("Diagnosis complete");
 }
 </script>
 </body>
