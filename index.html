@@ -62,14 +62,14 @@
    path:hover {
      fill: #bbb;
    }
- /* Blue for e-will states */
-.highlight {
- fill: #007acc !important;
-}
-/* Green for other electronic docs states */
-.other-docs-highlight {
- fill: #44aa44 !important;
-}
+   /* Blue for e-will states */
+   .highlight {
+     fill: #007acc !important;
+   }
+   /* Green for other electronic docs states */
+   .other-docs-highlight {
+     fill: #44aa44 !important;
+   }
    /* Active state styling when a state is clicked */
    .active {
      stroke: #000;
@@ -96,280 +96,252 @@
      vertical-align: middle;
    }
    .legend .e-wills {
- background: #007acc; /* Blue color */
+     background: #007acc; /* Blue color */
    }
    .legend .other-docs {
- background: #44aa44; /* Green color */
+     background: #44aa44; /* Green color */
    }
    /* Bottom legend styling */
-.bottom-legend {
- position: fixed;
- bottom: 1rem;
- left: 0;
- right: 0;
- display: flex;
- justify-content: center;
- gap: 2rem;
- background: rgba(255, 255, 255, 0.9);
- padding: 0.8rem 1rem;
- border-top: 1px solid #ccc;
- box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
- font-size: 1rem;
-}
-
-.legend-item {
- display: flex;
- align-items: center;
- margin: 0 0.5rem;
-}
-
-.legend-item span {
- display: inline-block;
- width: 1.2em;
- height: 1.2em;
- margin-right: 0.5em;
- vertical-align: middle;
-}
-
-.legend-item .e-wills {
- background: #007acc; /* Blue color */
-}
-
-.legend-item .other-docs {
- background: #44aa44; /* Green color */
-}
-
-.menu-content {
-  position: fixed;
-  top: 0;
-  left: -300px;  /* Changed from right:-300px to left:-300px */
-  width: 250px;
-  height: 100%;
-  background-color: white;
-  box-shadow: 2px 0 5px rgba(0,0,0,0.2);  /* Changed shadow direction */
-  transition: left 0.3s ease;  /* Changed from right to left */
-  z-index: 999;
-  padding: 2rem 1rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.menu-content.open {
-  left: 0;
-}
-
-.menu-links {
-  display: flex;
-  flex-direction: column;
-  margin-top: 2rem;
-}
-
-.menu-links a {
-  padding: 0.8rem 0;
-  text-decoration: none;
-  color: #007acc;
-  font-weight: 500;
-  font-size: 1.1rem;
-  border-bottom: 1px solid #eee;
-  transition: color 0.3s;
-}
-
-.menu-links a:hover {
-  color: #005a9c;
-}
-
-.close-menu {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  font-size: 2rem;
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: #333;
-  z-index: 1002; /* Higher than hamburger */
-  transition: color 0.3s;
-  padding: 0;
-  line-height: 1;
-  width: 30px;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.close-menu:hover {
-  color: #007acc;
-}
-
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.5);
-  z-index: 998;
-  display: none;
-}
-
-.overlay.open {
-  display: block;
-}
-
-/* Modal styling */
-.modal {
- display: none;
- position: fixed;
- z-index: 2000;
- left: 0;
- top: 0;
- width: 100%;
- height: 100%;
- overflow: auto;
- background-color: rgba(0,0,0,0.6);
-}
-
-.modal-content {
- background-color: #fefefe;
- margin: 10% auto;
- padding: 20px;
- border: 1px solid #888;
- border-radius: 8px;
- width: 80%;
- max-width: 600px;
- box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-}
-
-.modal-header {
- display: flex;
- justify-content: space-between;
- align-items: center;
- padding-bottom: 10px;
- border-bottom: 1px solid #ddd;
-}
-
-.modal-header h2 {
- margin: 0;
- color: #007acc;
-}
-
-.close {
- color: #aaa;
- font-size: 28px;
- font-weight: bold;
- cursor: pointer;
-}
-
-.close:hover,
-.close:focus {
- color: black;
- text-decoration: none;
-}
-
-.modal-body {
- padding: 15px 0;
-}
-
-.statute-link {
- display: inline-block;
- margin-top: 15px;
- padding: 8px 16px;
- background-color: #007acc;
- color: white;
- text-decoration: none;
- border-radius: 4px;
- font-weight: bold;
-}
-
-.statute-link:hover {
- background-color: #005a9c;
-}
-/* Styling for multiple statute links */
-.statute-links {
- margin-top: 15px;
-}
-
-.statute-links a {
- display: block;
- margin-bottom: 10px;
- padding: 8px 16px;
- background-color: #007acc;
- color: white;
- text-decoration: none;
- border-radius: 4px;
- font-weight: bold;
-}
-
-.statute-links a:hover {
- background-color: #005a9c;
-}
-/* Styling for copyright in the hamburger menu */
-.menu-footer {
-      text-align: center;
-      font-size: 0.8rem;
-      color: #666;
-      margin-top: auto;
-      padding-top: 1rem;
-      border-top: 1px solid #eee;
-    }
-/* Logo Menu Styling */
-.logo-menu {
-  position: fixed;
-  top: 15px;
-  left: 15px;
-  z-index: 1001;
-  display: block;
-  background: white;
-  border-radius: 50%;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  transition: transform 0.2s ease;
-  width: 50px;
-  height: 50px;
-  overflow: hidden;
-  cursor: pointer;
-}
-
-.logo-menu:hover {
-  transform: scale(1.1);
-  box-shadow: 0 3px 8px rgba(0,0,0,0.15);
-}
-
-.logo {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-/* Back Button Styling */
-.back-button {
-  position: fixed;
-  top: 15px;
-  right: 15px;
-  z-index: 1001;
-  display: none; /* Hidden by default, shown when not on home page */
-  background: white;
-  border-radius: 50%;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  transition: transform 0.2s ease;
-  width: 50px;
-  height: 50px;
-  text-align: center;
-  line-height: 50px;
-  font-size: 24px;
-  font-weight: bold;
-  text-decoration: none;
-  color: #007acc;
-  cursor: pointer;
-}
-
-.back-button:hover {
-  transform: scale(1.1);
-  box-shadow: 0 3px 8px rgba(0,0,0,0.15);
-}
- </style>
+   .bottom-legend {
+     position: fixed;
+     bottom: 1rem;
+     left: 0;
+     right: 0;
+     display: flex;
+     justify-content: center;
+     gap: 2rem;
+     background: rgba(255, 255, 255, 0.9);
+     padding: 0.8rem 1rem;
+     border-top: 1px solid #ccc;
+     box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+     font-size: 1rem;
+   }
+   .legend-item {
+     display: flex;
+     align-items: center;
+     margin: 0 0.5rem;
+   }
+   .legend-item span {
+     display: inline-block;
+     width: 1.2em;
+     height: 1.2em;
+     margin-right: 0.5em;
+     vertical-align: middle;
+   }
+   .legend-item .e-wills {
+     background: #007acc; /* Blue color */
+   }
+   .legend-item .other-docs {
+     background: #44aa44; /* Green color */
+   }
+   .menu-content {
+     position: fixed;
+     top: 0;
+     left: -300px;
+     width: 250px;
+     height: 100%;
+     background-color: white;
+     box-shadow: 2px 0 5px rgba(0,0,0,0.2);
+     transition: left 0.3s ease;
+     z-index: 999;
+     padding: 2rem 1rem;
+     display: flex;
+     flex-direction: column;
+     justify-content: space-between;
+   }
+   .menu-content.open {
+     left: 0;
+   }
+   .menu-links {
+     display: flex;
+     flex-direction: column;
+     margin-top: 2rem;
+   }
+   .menu-links a {
+     padding: 0.8rem 0;
+     text-decoration: none;
+     color: #007acc;
+     font-weight: 500;
+     font-size: 1.1rem;
+     border-bottom: 1px solid #eee;
+     transition: color 0.3s;
+   }
+   .menu-links a:hover {
+     color: #005a9c;
+   }
+   .close-menu {
+     position: absolute;
+     top: 1rem;
+     right: 1rem;
+     font-size: 2rem;
+     background: none;
+     border: none;
+     cursor: pointer;
+     color: #333;
+     z-index: 1002;
+     transition: color 0.3s;
+     padding: 0;
+     line-height: 1;
+     width: 30px;
+     height: 30px;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+   }
+   .close-menu:hover {
+     color: #007acc;
+   }
+   .overlay {
+     position: fixed;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+     background-color: rgba(0,0,0,0.5);
+     z-index: 998;
+     display: none;
+   }
+   .overlay.open {
+     display: block;
+   }
+   /* Modal styling */
+   .modal {
+     display: none;
+     position: fixed;
+     z-index: 2000;
+     left: 0;
+     top: 0;
+     width: 100%;
+     height: 100%;
+     overflow: auto;
+     background-color: rgba(0,0,0,0.6);
+   }
+   .modal-content {
+     background-color: #fefefe;
+     margin: 10% auto;
+     padding: 20px;
+     border: 1px solid #888;
+     border-radius: 8px;
+     width: 80%;
+     max-width: 600px;
+     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+   }
+   .modal-header {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     padding-bottom: 10px;
+     border-bottom: 1px solid #ddd;
+   }
+   .modal-header h2 {
+     margin: 0;
+     color: #007acc;
+   }
+   .close {
+     color: #aaa;
+     font-size: 28px;
+     font-weight: bold;
+     cursor: pointer;
+   }
+   .close:hover,
+   .close:focus {
+     color: black;
+     text-decoration: none;
+   }
+   .modal-body {
+     padding: 15px 0;
+   }
+   .statute-link {
+     display: inline-block;
+     margin-top: 15px;
+     padding: 8px 16px;
+     background-color: #007acc;
+     color: white;
+     text-decoration: none;
+     border-radius: 4px;
+     font-weight: bold;
+   }
+   .statute-link:hover {
+     background-color: #005a9c;
+   }
+   /* Styling for multiple statute links */
+   .statute-links {
+     margin-top: 15px;
+   }
+   .statute-links a {
+     display: block;
+     margin-bottom: 10px;
+     padding: 8px 16px;
+     background-color: #007acc;
+     color: white;
+     text-decoration: none;
+     border-radius: 4px;
+     font-weight: bold;
+   }
+   .statute-links a:hover {
+     background-color: #005a9c;
+   }
+   /* Styling for copyright in the hamburger menu */
+   .menu-footer {
+     text-align: center;
+     font-size: 0.8rem;
+     color: #666;
+     margin-top: auto;
+     padding-top: 1rem;
+     border-top: 1px solid #eee;
+   }
+   /* Logo Menu Styling */
+   .logo-menu {
+     position: fixed;
+     top: 15px;
+     left: 15px;
+     z-index: 1001;
+     display: block;
+     background: white;
+     border-radius: 50%;
+     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+     transition: transform 0.2s ease;
+     width: 50px;
+     height: 50px;
+     overflow: hidden;
+     cursor: pointer;
+   }
+   .logo-menu:hover {
+     transform: scale(1.1);
+     box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+   }
+   .logo {
+     display: block;
+     width: 100%;
+     height: 100%;
+     object-fit: contain;
+   }
+   /* Back Button Styling */
+   .back-button {
+     position: fixed;
+     top: 15px;
+     right: 15px;
+     z-index: 1001;
+     display: none; /* Hidden by default, shown when not on home page */
+     background: white;
+     border-radius: 50%;
+     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+     transition: transform 0.2s ease;
+     width: 50px;
+     height: 50px;
+     text-align: center;
+     line-height: 50px;
+     font-size: 24px;
+     font-weight: bold;
+     text-decoration: none;
+     color: #007acc;
+     cursor: pointer;
+   }
+   .back-button:hover {
+     transform: scale(1.1);
+     box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+   }
+  </style>
 </head>
 <body>
 <!-- Logo Menu Button -->
@@ -397,22 +369,23 @@
 <div class="title">States with electronic estate planning legislation</div>
 <!-- Legend: indicates that blue shading means the state authorizes electronic wills -->
 <div class="bottom-legend">
-    <div class="legend-item"><span class="e-wills"></span> Authorizes electronic wills</div>
-    <div class="legend-item"><span class="other-docs"></span> Authorizes e-wills & electronic estate planning documents</div>
-  </div>
-  <!-- Modal for displaying state information -->
+  <div class="legend-item"><span class="e-wills"></span> Authorizes electronic wills</div>
+  <div class="legend-item"><span class="other-docs"></span> Authorizes e-wills & electronic estate planning documents</div>
+</div>
+<!-- Modal for displaying state information -->
 <div id="stateModal" class="modal">
-   <div class="modal-content">
-     <div class="modal-header">
-       <h2 id="modalTitle">State Name</h2>
-       <span class="close">&times;</span>
-     </div>
-     <div class="modal-body" id="modalBody">
-       <p id="modalDescription">Information about the state's electronic will legislation will appear here.</p>
-       <div id="statuteLinks" class="statute-links"></div>
-     </div>
-   </div>
- </div>
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2 id="modalTitle">State Name</h2>
+      <span class="close">&times;</span>
+    </div>
+    <div class="modal-body" id="modalBody">
+      <p id="modalDescription">Information about the state's electronic will legislation will appear here.</p>
+      <div id="statuteLinks" class="statute-links"></div>
+    </div>
+  </div>
+</div>
+
 <!-- BEGIN EMBEDDED SVG MAP -->
 <!-- 
      The following <svg> element is taken directly from your uploaded file.
@@ -852,141 +825,158 @@
      style="stroke-width:0.97063118000000004;fill:#f9f9f9" />
 </svg>
 <!-- END EMBEDDED SVG MAP -->
+
 <script>
 // Menu functionality
-const logoMenu = document.getElementById("logoMenu");
-const menuContent = document.getElementById("menuContent");
-const closeMenu = document.getElementById("closeMenu");
-const overlay = document.getElementById("overlay");
-const backButton = document.getElementById("backButton");
+document.addEventListener("DOMContentLoaded", function() {
+  const logoMenu = document.getElementById("logoMenu");
+  const menuContent = document.getElementById("menuContent");
+  const closeMenu = document.getElementById("closeMenu");
+  const overlay = document.getElementById("overlay");
+  const backButton = document.getElementById("backButton");
 
-// Function to toggle menu
-function toggleMenu() {
-  menuContent.classList.toggle("open");
-  overlay.classList.toggle("open");
-}
+  // Function to toggle menu
+  function toggleMenu() {
+    menuContent.classList.toggle("open");
+    overlay.classList.toggle("open");
+  }
 
-// Event listeners for menu toggle
-logoMenu.addEventListener("click", toggleMenu);
-closeMenu.addEventListener("click", toggleMenu);
-overlay.addEventListener("click", toggleMenu);
+  // Event listeners for menu toggle
+  logoMenu.addEventListener("click", toggleMenu);
+  closeMenu.addEventListener("click", toggleMenu);
+  overlay.addEventListener("click", toggleMenu);
 
-// Check if we're on a page other than the home page
-function checkForBackButton() {
-  // Get the current path
-  const path = window.location.pathname;
+  // Check if we're on a page other than the home page
+  function checkForBackButton() {
+    // Get the current path
+    const path = window.location.pathname;
+    
+    // If we're not on the home page (root or index.html), show back button
+    if (path !== "/" && path !== "/index.html" && !path.endsWith("/")) {
+      backButton.style.display = "block";
+    }
+  }
+
+  // Run the check when the page loads
+  checkForBackButton();
   
-  // If we're not on the home page (root or index.html), show back button
-  if (path !== "/" && path !== "/index.html" && !path.endsWith("/")) {
-    backButton.style.display = "block";
-  }
-}
-
-// Run the check when the page loads
-window.addEventListener("DOMContentLoaded", checkForBackButton);
-   // Define states with electronic will legislation, including statute information
+  // Define states with electronic will legislation, including statute information
   window.stateStatutes = {
-  "AZ": {
-    authorizes: "e-wills",
-    statute: "Ariz. Rev. Stat. § 14-2518",
-    url: "https://www.azleg.gov/viewdocument/?docName=https://www.azleg.gov/ars/14/02518.htm",
-    description: "Arizona allows for electronic wills that meet specific requirements for electronic signatures and witnessing."
-  },
-  "CO": {
-    authorizes: "both",
-    statute: ["Colo. Rev. Stat. § 15-11-1301", "Colo. Rev. Stat. § 15-25-101"],
-    url: [
-      "https://leg.colorado.gov/bills/hb21-1004",
-      "https://leg.colorado.gov/bills/hb24-1248"
-    ],
-    urlLabel: ["View Uniform Electronic Wills Act", "View Uniform Non-Testamentary Estate Planning Documents Act"],
-    description: "Colorado has adopted the Uniform Electronic Wills Act and the Uniform Non-Testamentary Estate Planning Documents Act."
-  },
-  "DC": {
-    authorizes: "e-wills",
-    statute: "D.C. Code § 18-901",
-    url: "https://code.dccouncil.us/dc/council/code/sections/18-901",
-    description: "The District of Columbia has adopted the Uniform Electronic Wills Act."
-  },
-  "FL": {
-    authorizes: "e-wills",
-    statute: "Fla. Stat. § 732.522",
-    url: "http://www.leg.state.fl.us/Statutes/index.cfm?App_mode=Display_Statute&URL=0700-0799/0732/Sections/0732.522.html",
-    description: "Florida permits electronic wills and provides specific requirements for their execution and storage."
-  },
-  "ID": {
-    authorizes: "e-wills",
-    statute: "Idaho Code § 15-2-1101",
-    url: "https://legislature.idaho.gov/statutesrules/idstat/title15/t15ch2/sect15-2-1101/",
-    description: "Idaho has adopted the Uniform Electronic Wills Act."
-  },
-  "IL": {
-    authorizes: "both",
-    statute: "755 ILCS 6/1-1",
-    url: "https://www.ilga.gov/legislation/ilcs/ilcs5.asp?ActID=4176",
-    description: "Illinois has enacted the Electronic Wills, Electronic Estate Planning Documents, and Remote Witnesses Act."
-  },
-  "IN": {
-    authorizes: "e-wills",
-    statute: "Ind. Code § 29-1-21-1",
-    url: "https://iga.in.gov/legislative/laws/2023/ic/titles/029#29-1-21-1",
-    description: "Indiana allows electronic wills with specific provisions for electronic signatures and witnessing."
-  },
-  "MD": {
-    authorizes: "e-wills",
-    statute: "Md. Code, Est. & Trusts § 4-101",
-    url: "https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=get&section=4-101&enactments=False&archived=False",
-    description: "Maryland's legislation permits electronic signatures for wills and defines parameters for their validity."
-  },
-  "MN": {
-    authorizes: "e-wills",
-    statute: "Minn. Stat. § 524.1-201",
-    url: "https://www.revisor.mn.gov/statutes/cite/524.1-201",
-    description: "Minnesota has updated its probate code to include provisions for electronic wills."
-  },
-  "ND": {
-    authorizes: "both",
-    statute: ["N.D. Cent. Code § 30.1-37-02", "N.D. Cent. Code § 59-22-01"],
-    url: [
-      "https://ndlegis.gov/cencode/t30-1c37.pdf",
-      "https://ndlegis.gov/assembly/69-2025/regular/documents/25-0258-03000.pdf"
-    ],
-    urlLabel: ["View Uniform Electronic Wills Act", "View Uniform Electronic Estate Planning Documents Act"],
-    description: "North Dakota has adopted both the Uniform Electronic Wills Act and the Uniform Electronic Estate Planning Documents Act."
-  },
-  "NV": {
-    authorizes: "e-wills",
-    statute: "Nev. Rev. Stat. § 133.085",
-    url: "https://www.leg.state.nv.us/NRS/NRS-133.html#NRS133Sec085",
-    description: "Nevada was one of the first states to authorize electronic wills, with specific technological requirements."
-  },
-  "OK": {
-    authorizes: "both",
-    statute: "Okla. Stat. tit. 84, § 901",
-    url: "https://www.oscn.net/applications/oscn/index.asp?level=1&ftdb=STOKST84#Chapter9-UniformElectronicEstatePlanningDocumentsAct",
-    description: "Oklahoma has enacted the Uniform Electronic Estate Planning Documents Act, which includes provisions for electronic wills."
-  },
-  "UT": {
-    authorizes: "e-wills",
-    statute: "Utah Code § 75-2-1401",
-    url: "https://le.utah.gov/xcode/Title75/Chapter2/75-2-S1401.html",
-    description: "Utah has adopted the Uniform Electronic Wills Act."
-  },
-  "WA": {
-    authorizes: "both",
-    statute: "Wash. Rev. Code § 11.135.005",
-    url: "https://app.leg.wa.gov/rcw/default.aspx?cite=11.135.005",
-    description: "Washington has enacted the Uniform Electronic Estate Planning Documents Act, which includes provisions for electronic wills."
-  },
-  "WI": {
-    authorizes: "both",
-    statute: "Wis. Stat. Sec. 140.147",
-    url: "https://docs.legis.wisconsin.gov/statutes/statutes/140/147",
-    description: "Wisconsin allows for electronic wills and other estate planning documents under specific conditions, including requiring attorney supervision for remote notarization and signing."
-  }
-};
-   
-   document.addEventListener("DOMContentLoaded", function() {
+    "AZ": {
+      authorizes: "e-wills",
+      statute: "Ariz. Rev. Stat. § 14-2518",
+      url: "https://www.azleg.gov/viewdocument/?docName=https://www.azleg.gov/ars/14/02518.htm",
+      description: "Arizona allows for electronic wills that meet specific requirements for electronic signatures and witnessing."
+    },
+    "CO": {
+      authorizes: "both",
+      statute: ["Colo. Rev. Stat. § 15-11-1301", "Colo. Rev. Stat. § 15-25-101"],
+      url: [
+        "https://leg.colorado.gov/bills/hb21-1004",
+        "https://leg.colorado.gov/bills/hb24-1248"
+      ],
+      urlLabel: ["View Uniform Electronic Wills Act", "View Uniform Non-Testamentary Estate Planning Documents Act"],
+      description: "Colorado has adopted the Uniform Electronic Wills Act and the Uniform Non-Testamentary Estate Planning Documents Act."
+    },
+    "DC": {
+      authorizes: "e-wills",
+      statute: "D.C. Code § 18-901",
+      url: "https://code.dccouncil.us/dc/council/code/sections/18-901",
+      description: "The District of Columbia has adopted the Uniform Electronic Wills Act."
+    },
+    "FL": {
+      authorizes: "e-wills",
+      statute: "Fla. Stat. § 732.522",
+      url: "http://www.leg.state.fl.us/Statutes/index.cfm?App_mode=Display_Statute&URL=0700-0799/0732/Sections/0732.522.html",
+      description: "Florida permits electronic wills and provides specific requirements for their execution and storage."
+    },
+    "ID": {
+      authorizes: "e-wills",
+      statute: "Idaho Code § 15-2-1101",
+      url: "https://legislature.idaho.gov/statutesrules/idstat/title15/t15ch2/sect15-2-1101/",
+      description: "Idaho has adopted the Uniform Electronic Wills Act."
+    },
+    "IL": {
+      authorizes: "both",
+      statute: "755 ILCS 6/1-1",
+      url: "https://www.ilga.gov/legislation/ilcs/ilcs5.asp?ActID=4176",
+      description: "Illinois has enacted the Electronic Wills, Electronic Estate Planning Documents, and Remote Witnesses Act."
+    },
+    "IN": {
+      authorizes: "e-wills",
+      statute: "Ind. Code § 29-1-21-1",
+      url: "https://iga.in.gov/legislative/laws/2023/ic/titles/029#29-1-21-1",
+      description: "Indiana allows electronic wills with specific provisions for electronic signatures and witnessing."
+    },
+    "MD": {
+      authorizes: "e-wills",
+      statute: "Md. Code, Est. & Trusts § 4-101",
+      url: "https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=get&section=4-101&enactments=False&archived=False",
+      description: "Maryland's legislation permits electronic signatures for wills and defines parameters for their validity."
+    },
+    "MN": {
+      authorizes: "e-wills",
+      statute: "Minn. Stat. § 524.1-201",
+      url: "https://www.revisor.mn.gov/statutes/cite/524.1-201",
+      description: "Minnesota has updated its probate code to include provisions for electronic wills."
+    },
+    "ND": {
+      authorizes: "both",
+      statute: ["N.D. Cent. Code § 30.1-37-02", "N.D. Cent. Code § 59-22-01"],
+      url: [
+        "https://ndlegis.gov/cencode/t30-1c37.pdf",
+        "https://ndlegis.gov/assembly/69-2025/regular/documents/25-0258-03000.pdf"
+      ],
+      urlLabel: ["View Uniform Electronic Wills Act", "View Uniform Electronic Estate Planning Documents Act"],
+      description: "North Dakota has adopted both the Uniform Electronic Wills Act and the Uniform Electronic Estate Planning Documents Act."
+    },
+    "NV": {
+      authorizes: "e-wills",
+      statute: "Nev. Rev. Stat. § 133.085",
+      url: "https://www.leg.state.nv.us/NRS/NRS-133.html#NRS133Sec085",
+      description: "Nevada was one of the first states to authorize electronic wills, with specific technological requirements."
+    },
+    "OK": {
+      authorizes: "both",
+      statute: "Okla. Stat. tit. 84, § 901",
+      url: "https://www.oscn.net/applications/oscn/index.asp?level=1&ftdb=STOKST84#Chapter9-UniformElectronicEstatePlanningDocumentsAct",
+      description: "Oklahoma has enacted the Uniform Electronic Estate Planning Documents Act, which includes provisions for electronic wills."
+    },
+    "UT": {
+      authorizes: "e-wills",
+      statute: "Utah Code § 75-2-1401",
+      url: "https://le.utah.gov/xcode/Title75/Chapter2/75-2-S1401.html",
+      description: "Utah has adopted the Uniform Electronic Wills Act."
+    },
+    "WA": {
+      authorizes: "both",
+      statute: "Wash. Rev. Code § 11.135.005",
+      url: "https://app.leg.wa.gov/rcw/default.aspx?cite=11.135.005",
+      description: "Washington has enacted the Uniform Electronic Estate Planning Documents Act, which includes provisions for electronic wills."
+    },
+    "WI": {
+      authorizes: "both",
+      statute: "Wis. Stat. Sec. 140.147",
+      url: "https://docs.legis.wisconsin.gov/statutes/statutes/140/147",
+      description: "Wisconsin allows for electronic wills and other estate planning documents under specific conditions, including requiring attorney supervision for remote notarization and signing."
+    }
+  };
+
+  // Define a mapping of state codes to full state names
+  const stateNames = {
+    "AL": "Alabama", "AK": "Alaska", "AZ": "Arizona", "AR": "Arkansas", "CA": "California",
+    "CO": "Colorado", "CT": "Connecticut", "DE": "Delaware", "DC": "District of Columbia",
+    "FL": "Florida", "GA": "Georgia", "HI": "Hawaii", "ID": "Idaho", "IL": "Illinois",
+    "IN": "Indiana", "IA": "Iowa", "KS": "Kansas", "KY": "Kentucky", "LA": "Louisiana",
+    "ME": "Maine", "MD": "Maryland", "MA": "Massachusetts", "MI": "Michigan", "MN": "Minnesota",
+    "MS": "Mississippi", "MO": "Missouri", "MT": "Montana", "NE": "Nebraska", "NV": "Nevada",
+    "NH": "New Hampshire", "NJ": "New Jersey", "NM": "New Mexico", "NY": "New York",
+    "NC": "North Carolina", "ND": "North Dakota", "OH": "Ohio", "OK": "Oklahoma", "OR": "Oregon",
+    "PA": "Pennsylvania", "RI": "Rhode Island", "SC": "South Carolina", "SD": "South Dakota",
+    "TN": "Tennessee", "TX": "Texas", "UT": "Utah", "VT": "Vermont", "VA": "Virginia",
+    "WA": "Washington", "WV": "West Virginia", "WI": "Wisconsin", "WY": "Wyoming"
+  };
+  
   // Create sets from the statute object for easier checking
   const eWillStates = new Set(
     Object.keys(window.stateStatutes).filter(state => 
@@ -1000,521 +990,232 @@ window.addEventListener("DOMContentLoaded", checkForBackButton);
       window.stateStatutes[state].authorizes === "both"
     )
   );
-     
-     // Define a mapping of state codes to full state names
-     const stateNames = {
-       "AL": "Alabama",
-       "AK": "Alaska",
-       "AZ": "Arizona",
-       "AR": "Arkansas",
-       "CA": "California",
-       "CO": "Colorado",
-       "CT": "Connecticut",
-       "DE": "Delaware",
-       "DC": "District of Columbia",
-       "FL": "Florida",
-       "GA": "Georgia",
-       "HI": "Hawaii",
-       "ID": "Idaho",
-       "IL": "Illinois",
-       "IN": "Indiana",
-       "IA": "Iowa",
-       "KS": "Kansas",
-       "KY": "Kentucky",
-       "LA": "Louisiana",
-       "ME": "Maine",
-       "MD": "Maryland",
-       "MA": "Massachusetts",
-       "MI": "Michigan",
-       "MN": "Minnesota",
-       "MS": "Mississippi",
-       "MO": "Missouri",
-       "MT": "Montana",
-       "NE": "Nebraska",
-       "NV": "Nevada",
-       "NH": "New Hampshire",
-       "NJ": "New Jersey",
-       "NM": "New Mexico",
-       "NY": "New York",
-       "NC": "North Carolina",
-       "ND": "North Dakota",
-       "OH": "Ohio",
-       "OK": "Oklahoma",
-       "OR": "Oregon",
-       "PA": "Pennsylvania",
-       "RI": "Rhode Island",
-       "SC": "South Carolina",
-       "SD": "South Dakota",
-       "TN": "Tennessee",
-       "TX": "Texas",
-       "UT": "Utah",
-       "VT": "Vermont",
-       "VA": "Virginia",
-       "WA": "Washington",
-       "WV": "West Virginia",
-       "WI": "Wisconsin",
-       "WY": "Wyoming"
-     };
-     
-     // Get modal elements
-     const modal = document.getElementById("stateModal");
-     const modalTitle = document.getElementById("modalTitle");
-     const modalDescription = document.getElementById("modalDescription");
-     const statuteLinks = document.getElementById("statuteLinks");
-     const closeBtn = document.querySelector(".close");
-     
-     // Setup modal close behavior
-     closeBtn.onclick = function() {
-       modal.style.display = "none";
-     };
-     
-     window.onclick = function(event) {
-       if (event.target == modal) {
-         modal.style.display = "none";
-       }
-     };
-     
-     // Create a tooltip element for displaying state names
-     const tooltip = document.createElement('div');
-     tooltip.style.position = 'absolute';
-     tooltip.style.padding = '5px 10px';
-     tooltip.style.background = 'white';
-     tooltip.style.border = '1px solid #ccc';
-     tooltip.style.borderRadius = '5px';
-     tooltip.style.boxShadow = '0 0 5px rgba(0,0,0,0.2)';
-     tooltip.style.pointerEvents = 'none';
-     tooltip.style.opacity = '0';
-     tooltip.style.transition = 'opacity 0.2s';
-     tooltip.style.zIndex = '1000';
-     document.body.appendChild(tooltip);
-     
-     // Select all <path> elements within the SVG that have an id attribute
-     const paths = document.querySelectorAll('svg path[id]');
-     paths.forEach(path => {
-       const stateId = path.id.toUpperCase();
-       const stateName = stateNames[stateId] || stateId;
-       
-       // Apply highlighting classes
-       if (eWillStates.has(stateId)) {
-         path.classList.add("highlight");
-       }
-       if (otherDocsStates.has(stateId)) {
-         path.classList.add("other-docs-highlight");
-       }
-       
-       // Add hover behavior
-       path.addEventListener("mouseover", function(e) {
-         tooltip.textContent = stateName;
-         tooltip.style.opacity = '1';
-         tooltip.style.left = (e.pageX + 10) + 'px';
-         tooltip.style.top = (e.pageY + 10) + 'px';
-         this.classList.add("active");
-       });
-       
-       path.addEventListener("mousemove", function(e) {
-         tooltip.style.left = (e.pageX + 10) + 'px';
-         tooltip.style.top = (e.pageY + 10) + 'px';
-       });
-       
-       path.addEventListener("mouseout", function() {
-         tooltip.style.opacity = '0';
-         this.classList.remove("active");
-       });
-       
-       // Add click handler for states with electronic will legislation
-       if (eWillStates.has(stateId) || otherDocsStates.has(stateId)) {
-         path.style.cursor = "pointer";
-         
-         path.addEventListener("click", function() {
-           // Get the state statute information
-           const stateInfo = window.stateStatutes[stateId];
-           
-           // Update the modal with state information
-           modalTitle.textContent = stateName;
-           modalDescription.textContent = stateInfo.description;
-           
-           // Clear any existing statute links
-           statuteLinks.innerHTML = '';
-           
-           // Handle different types of statute links
-           if (Array.isArray(stateInfo.statute)) {
-             // Multiple statutes
-             stateInfo.statute.forEach((stat, index) => {
-               const link = document.createElement('a');
-               link.href = stateInfo.url[index];
-               link.textContent = stateInfo.urlLabel ? stateInfo.urlLabel[index] : `View ${stat}`;
-               link.className = 'statute-link';
-               link.target = '_blank';
-               statuteLinks.appendChild(link);
-             });
-           } else {
-             // Single statute
-             const link = document.createElement('a');
-             link.href = stateInfo.url;
-             link.textContent = `View ${stateInfo.statute}`;
-             link.className = 'statute-link';
-             link.target = '_blank';
-             statuteLinks.appendChild(link);
-           }
-           
-           // Display the modal
-           modal.style.display = "block";
-         });
-       }
-     });
-     
-     // Handle DC special case
-     const dcElement = document.getElementById("DC");
-     if (dcElement) {
-       // Calculate the points of a uniform five-point star
-       const center = { x: 878.18, y: 230 };
-       const outerRadius = 7;
-       const innerRadius = outerRadius * 0.4;
-       
-       let dcStarPath = `M${center.x},${center.y - outerRadius} `;
-       
-       for (let i = 0; i < 5; i++) {
-         // Outer point
-         const outerAngle = (i * 72 - 90) * Math.PI / 180;
-         const outerX = center.x + outerRadius * Math.cos(outerAngle);
-         const outerY = center.y + outerRadius * Math.sin(outerAngle);
-         
-         // Next inner point
-         const innerAngle = ((i * 72 + 36) - 90) * Math.PI / 180;
-         const innerX = center.x + innerRadius * Math.cos(innerAngle);
-         const innerY = center.y + innerRadius * Math.sin(innerAngle);
-         
-         // Add line to inner point
-         dcStarPath += `L${innerX},${innerY} `;
-         
-         // If not the last point, add line to next outer point
-         if (i < 4) {
-           const nextOuterAngle = ((i + 1) * 72 - 90) * Math.PI / 180;
-           const nextOuterX = center.x + outerRadius * Math.cos(nextOuterAngle);
-           const nextOuterY = center.y + outerRadius * Math.sin(nextOuterAngle);
-           dcStarPath += `L${nextOuterX},${nextOuterY} `;
-         }
-       }
-       
-       dcStarPath += "Z"; // Close the path
-       
-       // Set DC element properties
-       dcElement.setAttribute("d", dcStarPath);
-       dcElement.classList.add("highlight");
-       dcElement.style.display = "inline";
-       dcElement.style.cursor = "pointer";
-       
-       // Add hover behavior for DC
-       dcElement.addEventListener("mouseover", function(e) {
-         tooltip.textContent = "District of Columbia";
-         tooltip.style.opacity = '1';
-         tooltip.style.left = (e.pageX + 10) + 'px';
-         tooltip.style.top = (e.pageY + 10) + 'px';
-         this.classList.add("active");
-       });
-       
-       dcElement.addEventListener("mousemove", function(e) {
-         tooltip.style.left = (e.pageX + 10) + 'px';
-         tooltip.style.top = (e.pageY + 10) + 'px';
-       });
-       
-       dcElement.addEventListener("mouseout", function() {
-         tooltip.style.opacity = '0';
-         this.classList.remove("active");
-       });
-       
-       // Add click handler for DC
-       dcElement.addEventListener("click", function() {
-         const stateId = "DC";
-         const stateInfo = window.stateStatutes[stateId];
-         
-         modalTitle.textContent = "District of Columbia";
-         modalDescription.textContent = stateInfo.description;
-         
-         // Clear any existing statute links
-         statuteLinks.innerHTML = '';
-         
-         // Create link for DC
-         const link = document.createElement('a');
-         link.href = stateInfo.url;
-         link.textContent = `View ${stateInfo.statute}`;
-         link.className = 'statute-link';
-         link.target = '_blank';
-         statuteLinks.appendChild(link);
-         
-         modal.style.display = "block";
-       });
-       
-// Remove the existing DC element from its current position
-const dcParent = dcElement.parentNode;
-if (dcParent) {
-  dcParent.removeChild(dcElement);
-}
-
-// Create an overlay group that will sit on top of all other states
-const ns = "http://www.w3.org/2000/svg";
-const svgMap = document.querySelector("svg");
-
-// Create a new group element for the DC star
-const dcGroup = document.createElementNS(ns, "g");
-dcGroup.setAttribute("id", "dc-overlay");
-dcGroup.setAttribute("style", "pointer-events: all;");
-
-// Append the DC element to this new group
-dcGroup.appendChild(dcElement);
-
-// Set z-index to ensure it's on top
-dcElement.style.zIndex = "1000";
-dcElement.style.position = "relative";
-
-// Make sure the hover and active styles are more prominent
-dcElement.style.strokeWidth = "2";
-
-// Append the group to the SVG at the end to ensure it's on top of all other elements
-svgMap.appendChild(dcGroup);
-
-// Ensure the DC element is visible and properly styled
-dcElement.style.display = "inline";
-dcElement.style.fill = "#007acc";
-dcElement.style.stroke = "#333";
-dcElement.style.cursor = "pointer";
-     }
-   });
-   </script>
-<!-- 100% privacy-first analytics -->
-<script async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
-
-<script>
-function generateMapThumbnail() {
-  console.log("Starting thumbnail generation...");
   
-  // Get the SVG element
-  const svgMap = document.querySelector('svg');
-  if (!svgMap) {
-    console.error("SVG map not found");
-    return;
-  }
+  // Get modal elements
+  const modal = document.getElementById("stateModal");
+  const modalTitle = document.getElementById("modalTitle");
+  const modalDescription = document.getElementById("modalDescription");
+  const statuteLinks = document.getElementById("statuteLinks");
+  const closeBtn = document.querySelector(".close");
   
-  console.log("Creating SVG clone...");
-  // Clone the SVG to avoid modifying the original
-  const svgClone = svgMap.cloneNode(true);
+  // Setup modal close behavior
+  closeBtn.onclick = function() {
+    modal.style.display = "none";
+  };
   
-  // Make sure all states have proper styling
-  const paths = svgClone.querySelectorAll('path');
-  console.log(`Found ${paths.length} paths in the SVG`);
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  };
   
-  // Apply fill colors directly
+  // Create a tooltip element for displaying state names
+  const tooltip = document.createElement('div');
+  tooltip.style.position = 'absolute';
+  tooltip.style.padding = '5px 10px';
+  tooltip.style.background = 'white';
+  tooltip.style.border = '1px solid #ccc';
+  tooltip.style.borderRadius = '5px';
+  tooltip.style.boxShadow = '0 0 5px rgba(0,0,0,0.2)';
+  tooltip.style.pointerEvents = 'none';
+  tooltip.style.opacity = '0';
+  tooltip.style.transition = 'opacity 0.2s';
+  tooltip.style.zIndex = '1000';
+  document.body.appendChild(tooltip);
+  
+  // Select all <path> elements within the SVG that have an id attribute
+  const paths = document.querySelectorAll('svg path[id]');
   paths.forEach(path => {
-    const stateId = path.getAttribute('id');
-    if (!stateId) return;
+    const stateId = path.id.toUpperCase();
+    const stateName = stateNames[stateId] || stateId;
     
-    // Log the state we're processing
-    console.log(`Processing state: ${stateId}`);
+    // Apply highlighting classes
+    if (eWillStates.has(stateId)) {
+      path.classList.add("highlight");
+    }
+    if (otherDocsStates.has(stateId)) {
+      path.classList.add("other-docs-highlight");
+    }
     
-    // Default fill for states without legislation
-    path.setAttribute('fill', '#e0e0e0');
+    // Add hover behavior
+    path.addEventListener("mouseover", function(e) {
+      tooltip.textContent = stateName;
+      tooltip.style.opacity = '1';
+      tooltip.style.left = (e.pageX + 10) + 'px';
+      tooltip.style.top = (e.pageY + 10) + 'px';
+      this.classList.add("active");
+    });
     
-    // Check if this state has legislation
-    if (window.stateStatutes && stateId.toUpperCase() in window.stateStatutes) {
-      const stateInfo = window.stateStatutes[stateId.toUpperCase()];
+    path.addEventListener("mousemove", function(e) {
+      tooltip.style.left = (e.pageX + 10) + 'px';
+      tooltip.style.top = (e.pageY + 10) + 'px';
+    });
+    
+    path.addEventListener("mouseout", function() {
+      tooltip.style.opacity = '0';
+      this.classList.remove("active");
+    });
+    
+    // Add click handler for states with electronic will legislation
+    if (eWillStates.has(stateId) || otherDocsStates.has(stateId)) {
+      path.style.cursor = "pointer";
       
-      // Check the type of legislation
-      if (stateInfo.authorizes === "both") {
-        path.setAttribute('fill', '#44aa44'); // Green for both
-        console.log(`Set ${stateId} to green (both)`);
-      } else if (stateInfo.authorizes === "e-wills") {
-        path.setAttribute('fill', '#007acc'); // Blue for e-wills only
-        console.log(`Set ${stateId} to blue (e-wills)`);
+      path.addEventListener("click", function() {
+        // Get the state statute information
+        const stateInfo = window.stateStatutes[stateId];
+        
+        // Update the modal with state information
+        modalTitle.textContent = stateName;
+        modalDescription.textContent = stateInfo.description;
+        
+        // Clear any existing statute links
+        statuteLinks.innerHTML = '';
+        
+        // Handle different types of statute links
+        if (Array.isArray(stateInfo.statute)) {
+          // Multiple statutes
+          stateInfo.statute.forEach((stat, index) => {
+            const link = document.createElement('a');
+            link.href = stateInfo.url[index];
+            link.textContent = stateInfo.urlLabel ? stateInfo.urlLabel[index] : `View ${stat}`;
+            link.className = 'statute-link';
+            link.target = '_blank';
+            statuteLinks.appendChild(link);
+          });
+        } else {
+          // Single statute
+          const link = document.createElement('a');
+          link.href = stateInfo.url;
+          link.textContent = `View ${stateInfo.statute}`;
+          link.className = 'statute-link';
+          link.target = '_blank';
+          statuteLinks.appendChild(link);
+        }
+        
+        // Display the modal
+        modal.style.display = "block";
+      });
+    }
+  });
+  
+  // Handle DC special case
+  const dcElement = document.getElementById("DC");
+  if (dcElement && "DC" in window.stateStatutes) {
+    // Calculate the points of a uniform five-point star
+    const center = { x: 878.18, y: 230 };
+    const outerRadius = 7;
+    const innerRadius = outerRadius * 0.4;
+    
+    let dcStarPath = `M${center.x},${center.y - outerRadius} `;
+    
+    for (let i = 0; i < 5; i++) {
+      // Outer point
+      const outerAngle = (i * 72 - 90) * Math.PI / 180;
+      const outerX = center.x + outerRadius * Math.cos(outerAngle);
+      const outerY = center.y + outerRadius * Math.sin(outerAngle);
+      
+      // Next inner point
+      const innerAngle = ((i * 72 + 36) - 90) * Math.PI / 180;
+      const innerX = center.x + innerRadius * Math.cos(innerAngle);
+      const innerY = center.y + innerRadius * Math.sin(innerAngle);
+      
+      // Add line to inner point
+      dcStarPath += `L${innerX},${innerY} `;
+      
+      // If not the last point, add line to next outer point
+      if (i < 4) {
+        const nextOuterAngle = ((i + 1) * 72 - 90) * Math.PI / 180;
+        const nextOuterX = center.x + outerRadius * Math.cos(nextOuterAngle);
+        const nextOuterY = center.y + outerRadius * Math.sin(nextOuterAngle);
+        dcStarPath += `L${nextOuterX},${nextOuterY} `;
       }
     }
     
-    // Ensure proper stroke
-    path.setAttribute('stroke', '#333');
-    path.setAttribute('stroke-width', '1');
-  });
-  
-  // Handle DC separately since it's special in the SVG
-  const dcElement = svgClone.getElementById("DC");
-  if (dcElement && window.stateStatutes && "DC" in window.stateStatutes) {
-    const stateInfo = window.stateStatutes["DC"];
-    if (stateInfo.authorizes === "both") {
-      dcElement.setAttribute('fill', '#44aa44');
-      console.log("Set DC to green (both)");
-    } else if (stateInfo.authorizes === "e-wills") {
-      dcElement.setAttribute('fill', '#007acc');
-      console.log("Set DC to blue (e-wills)");
+    dcStarPath += "Z"; // Close the path
+    
+    // Set DC element properties
+    dcElement.setAttribute("d", dcStarPath);
+    dcElement.classList.add("highlight");
+    dcElement.style.display = "inline";
+    dcElement.style.cursor = "pointer";
+    
+    // Add hover behavior for DC
+    dcElement.addEventListener("mouseover", function(e) {
+      tooltip.textContent = "District of Columbia";
+      tooltip.style.opacity = '1';
+      tooltip.style.left = (e.pageX + 10) + 'px';
+      tooltip.style.top = (e.pageY + 10) + 'px';
+      this.classList.add("active");
+    });
+    
+    dcElement.addEventListener("mousemove", function(e) {
+      tooltip.style.left = (e.pageX + 10) + 'px';
+      tooltip.style.top = (e.pageY + 10) + 'px';
+    });
+    
+    dcElement.addEventListener("mouseout", function() {
+      tooltip.style.opacity = '0';
+      this.classList.remove("active");
+    });
+    
+    // Add click handler for DC
+    dcElement.addEventListener("click", function() {
+      const stateInfo = window.stateStatutes["DC"];
+      
+      modalTitle.textContent = "District of Columbia";
+      modalDescription.textContent = stateInfo.description;
+      
+      // Clear any existing statute links
+      statuteLinks.innerHTML = '';
+      
+      // Create link for DC
+      const link = document.createElement('a');
+      link.href = stateInfo.url;
+      link.textContent = `View ${stateInfo.statute}`;
+      link.className = 'statute-link';
+      link.target = '_blank';
+      statuteLinks.appendChild(link);
+      
+	  modal.style.display = "block";
+    });
+    
+    // Remove the existing DC element from its current position
+    const dcParent = dcElement.parentNode;
+    if (dcParent) {
+      dcParent.removeChild(dcElement);
     }
-  }
-  
-  // Add a white background behind the title
-  const titleBg = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-  titleBg.setAttribute("x", "200");
-  titleBg.setAttribute("y", "15");
-  titleBg.setAttribute("width", "600");
-  titleBg.setAttribute("height", "40");
-  titleBg.setAttribute("fill", "#ffffff");
-  titleBg.setAttribute("rx", "5");
-  
-  // Add title text
-  const titleText = document.createElementNS("http://www.w3.org/2000/svg", "text");
-  titleText.setAttribute("x", "500");
-  titleText.setAttribute("y", "42");
-  titleText.setAttribute("text-anchor", "middle");
-  titleText.setAttribute("font-size", "1.2em");
-  titleText.setAttribute("font-weight", "bold");
-  titleText.setAttribute("font-family", "Arial, sans-serif");
-  titleText.setAttribute("fill", "#000000");
-  titleText.textContent = "States with Electronic Will Legislation";
-  
-  // Insert the title elements
-  svgClone.appendChild(titleBg);
-  svgClone.appendChild(titleText);
-  
-  // Add legend
-  const legendY = 560;
-  
-  // Legend background
-  const legendBg = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-  legendBg.setAttribute("x", "200");
-  legendBg.setAttribute("y", legendY - 20);
-  legendBg.setAttribute("width", "600");
-  legendBg.setAttribute("height", "40");
-  legendBg.setAttribute("fill", "white");
-  legendBg.setAttribute("opacity", "0.9");
-  legendBg.setAttribute("rx", "5");
-  svgClone.appendChild(legendBg);
-  
-  // Blue box for e-wills
-  const blueBox = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-  blueBox.setAttribute("x", "220");
-  blueBox.setAttribute("y", legendY - 10);
-  blueBox.setAttribute("width", "20");
-  blueBox.setAttribute("height", "20");
-  blueBox.setAttribute("fill", "#007acc");
-  svgClone.appendChild(blueBox);
-  
-  // Blue text
-  const blueText = document.createElementNS("http://www.w3.org/2000/svg", "text");
-  blueText.setAttribute("x", "250");
-  blueText.setAttribute("y", legendY + 5);
-  blueText.setAttribute("font-size", "14");
-  blueText.setAttribute("font-family", "sans-serif");
-  blueText.textContent = "Authorizes electronic wills";
-  svgClone.appendChild(blueText);
-  
-  // Green box for both
-  const greenBox = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-  greenBox.setAttribute("x", "420");
-  greenBox.setAttribute("y", legendY - 10);
-  greenBox.setAttribute("width", "20");
-  greenBox.setAttribute("height", "20");
-  greenBox.setAttribute("fill", "#44aa44");
-  svgClone.appendChild(greenBox);
-  
-  // Green text
-  const greenText = document.createElementNS("http://www.w3.org/2000/svg", "text");
-  greenText.setAttribute("x", "450");
-  greenText.setAttribute("y", legendY + 5);
-  greenText.setAttribute("font-size", "14");
-  greenText.setAttribute("font-family", "sans-serif");
-  greenText.textContent = "E-wills & electronic estate planning documents";
-  svgClone.appendChild(greenText);
-  
-  // Set SVG attributes
-  svgClone.setAttribute("viewBox", "0 0 1000 589");
-  svgClone.setAttribute("width", "1200");
-  svgClone.setAttribute("height", "630");
-  
-  console.log("Converting SVG to string...");
-  const svgData = new XMLSerializer().serializeToString(svgClone);
-  
-  // Create canvas
-  const canvas = document.createElement('canvas');
-  canvas.width = 1200;
-  canvas.height = 630;
-  const ctx = canvas.getContext('2d');
-  
-  // Fill background
-  ctx.fillStyle = '#ffffff';
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-  
-  console.log("Creating image from SVG...");
-  const img = new Image();
-  img.onload = function() {
-    console.log("Drawing image to canvas...");
-    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
     
-    console.log("Converting canvas to JPEG...");
-    const imageUrl = canvas.toDataURL('image/jpeg', 0.9);
+    // Create an overlay group that will sit on top of all other states
+    const ns = "http://www.w3.org/2000/svg";
+    const svgMap = document.querySelector("svg");
     
-    console.log("Creating download link...");
-    const link = document.createElement('a');
-    link.href = imageUrl;
-    link.download = 'og-image.jpg';
-    link.click();
+    // Create a new group element for the DC star
+    const dcGroup = document.createElementNS(ns, "g");
+    dcGroup.setAttribute("id", "dc-overlay");
+    dcGroup.setAttribute("style", "pointer-events: all;");
     
-    console.log("Thumbnail generation complete!");
-  };
-  
-  img.onerror = function(e) {
-    console.error("Error loading SVG into image:", e);
-  };
-  
-  // Use Blob for better browser compatibility
-  const svgBlob = new Blob([svgData], {type: 'image/svg+xml'});
-  const url = URL.createObjectURL(svgBlob);
-  img.src = url;
-  
-  console.log("Started image loading process...");
-}
-function diagnoseThumbnail() {
-  console.log("Starting diagnosis...");
-  
-  // First log the stateStatutes object
-  console.log("State statutes object:", window.stateStatutes);
-  
-  // Check if DC exists in the statutes
-  if (window.stateStatutes && "DC" in window.stateStatutes) {
-    console.log("DC statute info:", window.stateStatutes["DC"]);
-  } else {
-    console.log("DC not found in statutes");
+    // Append the DC element to this new group
+    dcGroup.appendChild(dcElement);
+    
+    // Set z-index to ensure it's on top
+    dcElement.style.zIndex = "1000";
+    dcElement.style.position = "relative";
+    
+    // Make sure the hover and active styles are more prominent
+    dcElement.style.strokeWidth = "2";
+    
+    // Append the group to the SVG at the end to ensure it's on top of all other elements
+    svgMap.appendChild(dcGroup);
+    
+    // Ensure the DC element is visible and properly styled
+    dcElement.style.display = "inline";
+    dcElement.style.fill = "#007acc";
+    dcElement.style.stroke = "#333";
+    dcElement.style.cursor = "pointer";
   }
-  
-  // Get the SVG element
-  const svgMap = document.querySelector('svg');
-  if (!svgMap) {
-    console.error("SVG map not found");
-    return;
-  }
-  
-  // Check which states have path elements
-  const paths = svgMap.querySelectorAll('path[id]');
-  console.log(`Found ${paths.length} path elements with IDs`);
-  
-  // Check if state IDs match the statutes object
-  paths.forEach(path => {
-    const stateId = path.getAttribute('id').toUpperCase();
-    if (window.stateStatutes && stateId in window.stateStatutes) {
-      console.log(`State ${stateId} found in statutes: ${window.stateStatutes[stateId].authorizes}`);
-    } else {
-      console.log(`State ${stateId} not found in statutes`);
-    }
-  });
-  
-  // Check if DC element exists in a different form
-  const dcElement = document.getElementById("DC");
-  if (dcElement) {
-    console.log("DC element found with ID attribute");
-  } else {
-    console.log("DC element not found with ID attribute");
-  }
-  
-  // Try to find any element that might be DC
-  const possibleDCElements = document.querySelectorAll('*[data-id="DC"], *[data-name="District of Columbia"]');
-  console.log(`Found ${possibleDCElements.length} possible DC elements with data attributes`);
-  
-  console.log("Diagnosis complete");
-}
+});
 </script>
+<!-- Privacy-first analytics -->
+<script async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
 </body>
 </html>
