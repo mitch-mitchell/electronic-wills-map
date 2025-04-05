@@ -133,34 +133,6 @@
  background: #44aa44; /* Green color */
 }
 
-/* Hamburger Menu Styling */
-.hamburger-menu {
-  position: fixed;
-  top: 1rem;
-  right: 1rem;
-  z-index: 1000;
-  cursor: pointer;
-}
-
-.hamburger-icon {
-  width: 30px;
-  height: 24px;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  z-index: 1001; /* Higher than menu-content */
-}
-
-.hamburger-icon span {
-  display: block;
-  height: 4px;
-  width: 100%;
-  background-color: #007acc;
-  border-radius: 3px;
-  transition: all 0.3s ease;
-}
-
 .menu-content {
   position: fixed;
   top: 0;
@@ -336,8 +308,8 @@
       padding-top: 1rem;
       border-top: 1px solid #eee;
     }
-/* Logo styling and positioning */
-.logo-link {
+/* Logo Menu Styling */
+.logo-menu {
   position: fixed;
   top: 15px;
   left: 15px;
@@ -347,13 +319,13 @@
   border-radius: 50%;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
   transition: transform 0.2s ease;
-  text-decoration: none;
   width: 50px;
   height: 50px;
   overflow: hidden;
+  cursor: pointer;
 }
 
-.logo-link:hover {
+.logo-menu:hover {
   transform: scale(1.1);
   box-shadow: 0 3px 8px rgba(0,0,0,0.15);
 }
@@ -364,21 +336,45 @@
   height: 100%;
   object-fit: contain;
 }
+
+/* Back Button Styling */
+.back-button {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  z-index: 1001;
+  display: none; /* Hidden by default, shown when not on home page */
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  line-height: 50px;
+  font-size: 24px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #007acc;
+  cursor: pointer;
+}
+
+.back-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+}
  </style>
 </head>
 <body>
-<!-- Logo / Home Link -->
-<a href="/" class="logo-link">
+<!-- Logo Menu Button -->
+<div class="logo-menu" id="logoMenu">
   <img src="e-logo.png" alt="Electronic Wills Logo" class="logo" width="50" height="50">
-</a>
-<!-- Hamburger Menu -->
-<div class="hamburger-menu" id="hamburgerMenu">
-  <div class="hamburger-icon">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
 </div>
+
+<!-- Back Button (hidden by default) -->
+<a href="/" class="back-button" id="backButton">
+  ←
+</a>
 
 <div class="menu-content" id="menuContent">
   <button class="close-menu" id="closeMenu">&times;</button>
@@ -851,33 +847,37 @@
 </svg>
 <!-- END EMBEDDED SVG MAP -->
 <script>
-// Hamburger menu functionality
-const hamburgerMenu = document.getElementById("hamburgerMenu");
+// Menu functionality
+const logoMenu = document.getElementById("logoMenu");
 const menuContent = document.getElementById("menuContent");
 const closeMenu = document.getElementById("closeMenu");
 const overlay = document.getElementById("overlay");
+const backButton = document.getElementById("backButton");
 
-hamburgerMenu.addEventListener("click", function() {
-  menuContent.classList.add("open");
-  overlay.classList.add("open");
-  hamburgerMenu.style.display = "none"; // Hide hamburger when menu is open
-});
+// Function to toggle menu
+function toggleMenu() {
+  menuContent.classList.toggle("open");
+  overlay.classList.toggle("open");
+}
 
-closeMenu.addEventListener("click", function() {
-  menuContent.classList.remove("open");
-  overlay.classList.remove("open");
-  setTimeout(function() {
-    hamburgerMenu.style.display = "block"; // Show hamburger after menu closes
-  }, 300); // Wait for menu close animation to complete
-});
+// Event listeners for menu toggle
+logoMenu.addEventListener("click", toggleMenu);
+closeMenu.addEventListener("click", toggleMenu);
+overlay.addEventListener("click", toggleMenu);
 
-overlay.addEventListener("click", function() {
-  menuContent.classList.remove("open");
-  overlay.classList.remove("open");
-  setTimeout(function() {
-    hamburgerMenu.style.display = "block"; // Show hamburger after menu closes
-  }, 300); // Wait for menu close animation to complete
-});
+// Check if we're on a page other than the home page
+function checkForBackButton() {
+  // Get the current path
+  const path = window.location.pathname;
+  
+  // If we're not on the home page (root or index.html), show back button
+  if (path !== "/" && path !== "/index.html" && !path.endsWith("/")) {
+    backButton.style.display = "block";
+  }
+}
+
+// Run the check when the page loads
+window.addEventListener("DOMContentLoaded", checkForBackButton);
    // Define states with electronic will legislation, including statute information
    window.stateStatutes = {
      "AZ": {
