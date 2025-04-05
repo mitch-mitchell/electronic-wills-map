@@ -202,11 +202,21 @@
       border-top: 1px solid #eee;
     }
     
-    /* Changelog Specific Styling */
+   /* Changelog Specific Styling */
     .changelog-entry {
       margin-bottom: 30px;
       padding-bottom: 20px;
+    }
+
+    /* Add border only to entries that are not the last */
+    .changelog-entry:not(:last-child) {
       border-bottom: 1px solid #eee;
+    }
+
+    /* Special styling for last changelog entry */
+    .changelog-entry:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
     }
     
     .changelog-date {
@@ -247,12 +257,6 @@
     .minor {
       background-color: #d1ecf1;
       color: #0c5460;
-    }
-   /* Remove bottom border for last changelog entry */
-    .changelog-entry:last-child {
-      border-bottom: none;
-      margin-bottom: 0;
-      padding-bottom: 0;
     }
   </style>
 </head>
