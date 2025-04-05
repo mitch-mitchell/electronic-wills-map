@@ -659,16 +659,40 @@ document.addEventListener("DOMContentLoaded", function() {
           tooltip.style.opacity = '0';
         });
       });
+      
+      // Handle special case for DC
+      const dcElement = svgDoc.getElementById("DC");
+      if (dcElement) {
+        dcElement.addEventListener('mouseover', function(e) {
+          tooltip.textContent = "District of Columbia";
+          tooltip.style.opacity = '1';
+          updateTooltipPosition(e);
+        });
+        
+        dcElement.addEventListener('mousemove', function(e) {
+          updateTooltipPosition(e);
+        });
+        
+        dcElement.addEventListener('mouseout', function() {
+          tooltip.style.opacity = '0';
+        });
+      }
     });
     
     function updateTooltipPosition(e) {
-      // Get the position relative to the viewport
+      // This is the key function that needed fixing
+      // Get the bounding rectangle of the SVG object in the main document
       const rect = usMap.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
       
-      tooltip.style.left = (window.scrollX + e.clientX + 10) + 'px';
-      tooltip.style.top = (window.scrollY + e.clientY + 10) + 'px';
+      // Calculate position: we need to translate from SVG document coordinates to main document
+      // e.clientX and e.clientY are relative to the SVG viewport
+      // Add those to the position of the SVG object in the page
+      const x = rect.left + e.clientX;
+      const y = rect.top + e.clientY;
+      
+      // Position the tooltip near but not directly under the cursor
+      tooltip.style.left = (window.scrollX + x + 10) + 'px';
+      tooltip.style.top = (window.scrollY + y + 10) + 'px';
     }
   });
 </script>
