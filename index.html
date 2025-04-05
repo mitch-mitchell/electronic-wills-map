@@ -336,9 +336,41 @@
       padding-top: 1rem;
       border-top: 1px solid #eee;
     }
+/* Logo styling and positioning */
+.logo-link {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  z-index: 1001;
+  display: block;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+  text-decoration: none;
+  width: 50px;
+  height: 50px;
+  overflow: hidden;
+}
+
+.logo-link:hover {
+  transform: scale(1.1);
+  box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+}
+
+.logo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
  </style>
 </head>
 <body>
+<!-- Logo / Home Link -->
+<a href="index.html" class="logo-link">
+  <img src="e-logo.png" alt="Electronic Wills Logo" class="logo" width="50" height="50">
+</a>
 <!-- Hamburger Menu -->
 <div class="hamburger-menu" id="hamburgerMenu">
   <div class="hamburger-icon">
