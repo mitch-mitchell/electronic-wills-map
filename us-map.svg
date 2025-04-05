@@ -12,7 +12,7 @@
    height="589"
    version="1.1">
    
-  <style type="text/css">
+ <style type="text/css">
     path {
       fill: #e0e0e0;  /* Default light gray for states without e-wills */
       stroke: #333;   /* Dark outlines */
@@ -34,8 +34,9 @@
       stroke: #000;
       stroke-width: 2;
     }
-    
-  <!-- PASTE YOUR SVG PATH CONTENT HERE -->
+  </style>
+  
+  <!-- SVG PATH CONTENT STARTS HERE -->
 
   <path
      inkscape:connector-curvature="0"
