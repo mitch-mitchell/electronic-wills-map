@@ -136,12 +136,12 @@
 .menu-content {
   position: fixed;
   top: 0;
-  right: -300px;
+  left: -300px;  /* Changed from right:-300px to left:-300px */
   width: 250px;
   height: 100%;
   background-color: white;
-  box-shadow: -2px 0 5px rgba(0,0,0,0.2);
-  transition: right 0.3s ease;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.2);  /* Changed shadow direction */
+  transition: left 0.3s ease;  /* Changed from right to left */
   z-index: 999;
   padding: 2rem 1rem;
   display: flex;
@@ -150,7 +150,7 @@
 }
 
 .menu-content.open {
-  right: 0;
+  left: 0;
 }
 
 .menu-links {
