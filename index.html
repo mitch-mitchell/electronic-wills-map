@@ -252,8 +252,13 @@
      text-decoration: none;
    }
    .modal-body {
-     padding: 15px 0;
-   }
+    padding: 15px 0;
+    line-height: 1.5;
+  }
+
+  .modal-body strong {
+    color: #007acc;
+  }
    .statute-link {
      display: inline-block;
      margin-top: 15px;
@@ -864,13 +869,14 @@ document.addEventListener("DOMContentLoaded", function() {
   // Run the check when the page loads
   checkForBackButton();
   
-  // Define states with electronic will legislation, including statute information
-  window.stateStatutes = {
+ // Define states with electronic will legislation, including statute information
+ window.stateStatutes = {
     "AZ": {
       authorizes: "e-wills",
       statute: "Ariz. Rev. Stat. § 14-2518",
       url: "https://www.azleg.gov/viewdocument/?docName=https://www.azleg.gov/ars/14/02518.htm",
-      description: "Arizona allows for electronic wills that meet specific requirements for electronic signatures and witnessing."
+      description: "Arizona allows for electronic wills that meet specific requirements for electronic signatures and witnessing.",
+      effectiveDate: "July 1, 2019"
     },
     "CO": {
       authorizes: "both",
@@ -880,49 +886,58 @@ document.addEventListener("DOMContentLoaded", function() {
         "https://leg.colorado.gov/bills/hb24-1248"
       ],
       urlLabel: ["View Uniform Electronic Wills Act", "View Uniform Non-Testamentary Estate Planning Documents Act"],
-      description: "Colorado has adopted the Uniform Electronic Wills Act and the Uniform Non-Testamentary Estate Planning Documents Act."
+      description: "Colorado has adopted the Uniform Electronic Wills Act and the Uniform Non-Testamentary Estate Planning Documents Act.",
+      effectiveDate: ["January 1, 2021", "January 1, 2025"],
+      effectiveDateLabel: ["E-Wills Act", "Non-Testamentary Estate Planning Documents Act"]
     },
     "DC": {
       authorizes: "e-wills",
       statute: "D.C. Code § 18-901",
       url: "https://code.dccouncil.us/dc/council/code/sections/18-901",
-      description: "The District of Columbia has adopted the Uniform Electronic Wills Act."
+      description: "The District of Columbia has adopted the Uniform Electronic Wills Act.",
+      effectiveDate: "March 16, 2023"
     },
     "FL": {
       authorizes: "e-wills",
       statute: "Fla. Stat. § 732.522",
       url: "http://www.leg.state.fl.us/Statutes/index.cfm?App_mode=Display_Statute&URL=0700-0799/0732/Sections/0732.522.html",
-      description: "Florida permits electronic wills and provides specific requirements for their execution and storage."
+      description: "Florida permits electronic wills and provides specific requirements for their execution and storage.",
+      effectiveDate: "January 1, 2020"
     },
     "ID": {
       authorizes: "e-wills",
       statute: "Idaho Code § 15-2-1101",
       url: "https://legislature.idaho.gov/statutesrules/idstat/title15/t15ch2/sect15-2-1101/",
-      description: "Idaho has adopted the Uniform Electronic Wills Act."
+      description: "Idaho has adopted the Uniform Electronic Wills Act.",
+      effectiveDate: "July 1, 2023"
     },
     "IL": {
       authorizes: "both",
       statute: "755 ILCS 6/1-1",
       url: "https://www.ilga.gov/legislation/ilcs/ilcs5.asp?ActID=4176",
-      description: "Illinois has enacted the Electronic Wills, Electronic Estate Planning Documents, and Remote Witnesses Act."
+      description: "Illinois has enacted the Electronic Wills, Electronic Estate Planning Documents, and Remote Witnesses Act.",
+      effectiveDate: "January 1, 2022"
     },
     "IN": {
       authorizes: "e-wills",
       statute: "Ind. Code § 29-1-21-1",
       url: "https://iga.in.gov/legislative/laws/2023/ic/titles/029#29-1-21-1",
-      description: "Indiana allows electronic wills with specific provisions for electronic signatures and witnessing."
+      description: "Indiana allows electronic wills with specific provisions for electronic signatures and witnessing.",
+      effectiveDate: "July 1, 2018"
     },
     "MD": {
       authorizes: "e-wills",
       statute: "Md. Code, Est. & Trusts § 4-101",
       url: "https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=get&section=4-101&enactments=False&archived=False",
-      description: "Maryland's legislation permits electronic signatures for wills and defines parameters for their validity."
+      description: "Maryland's legislation permits electronic signatures for wills and defines parameters for their validity.",
+      effectiveDate: "October 1, 2020"
     },
     "MN": {
       authorizes: "e-wills",
       statute: "Minn. Stat. § 524.1-201",
       url: "https://www.revisor.mn.gov/statutes/cite/524.1-201",
-      description: "Minnesota has updated its probate code to include provisions for electronic wills."
+      description: "Minnesota has updated its probate code to include provisions for electronic wills.",
+      effectiveDate: "August 1, 2023"
     },
     "ND": {
       authorizes: "both",
@@ -932,40 +947,46 @@ document.addEventListener("DOMContentLoaded", function() {
         "https://ndlegis.gov/assembly/69-2025/regular/documents/25-0258-03000.pdf"
       ],
       urlLabel: ["View Uniform Electronic Wills Act", "View Uniform Electronic Estate Planning Documents Act"],
-      description: "North Dakota has adopted both the Uniform Electronic Wills Act and the Uniform Electronic Estate Planning Documents Act."
+      description: "North Dakota has adopted both the Uniform Electronic Wills Act and the Uniform Electronic Estate Planning Documents Act.",
+      effectiveDate: ["August 1, 2021", "August 1, 2024"],
+      effectiveDateLabel: ["E-Wills Act", "Electronic Estate Planning Documents Act"]
     },
     "NV": {
       authorizes: "e-wills",
       statute: "Nev. Rev. Stat. § 133.085",
       url: "https://www.leg.state.nv.us/NRS/NRS-133.html#NRS133Sec085",
-      description: "Nevada was one of the first states to authorize electronic wills, with specific technological requirements."
+      description: "Nevada was one of the first states to authorize electronic wills, with specific technological requirements.",
+      effectiveDate: "July 1, 2017"
     },
     "OK": {
       authorizes: "both",
       statute: "Okla. Stat. tit. 84, § 901",
       url: "https://www.oscn.net/applications/oscn/index.asp?level=1&ftdb=STOKST84#Chapter9-UniformElectronicEstatePlanningDocumentsAct",
-      description: "Oklahoma has enacted the Uniform Electronic Estate Planning Documents Act, which includes provisions for electronic wills."
+      description: "Oklahoma has enacted the Uniform Electronic Estate Planning Documents Act, which includes provisions for electronic wills.",
+      effectiveDate: "November 1, 2024"
     },
     "UT": {
       authorizes: "e-wills",
       statute: "Utah Code § 75-2-1401",
       url: "https://le.utah.gov/xcode/Title75/Chapter2/75-2-S1401.html",
-      description: "Utah has adopted the Uniform Electronic Wills Act."
+      description: "Utah has adopted the Uniform Electronic Wills Act.",
+      effectiveDate: "May 5, 2020"
     },
     "WA": {
       authorizes: "both",
       statute: "Wash. Rev. Code § 11.135.005",
       url: "https://app.leg.wa.gov/rcw/default.aspx?cite=11.135.005",
-      description: "Washington has enacted the Uniform Electronic Estate Planning Documents Act, which includes provisions for electronic wills."
+      description: "Washington has enacted the Uniform Electronic Estate Planning Documents Act, which includes provisions for electronic wills.",
+      effectiveDate: "January 1, 2024"
     },
     "WI": {
       authorizes: "both",
       statute: "Wis. Stat. Sec. 140.147",
       url: "https://docs.legis.wisconsin.gov/statutes/statutes/140/147",
-      description: "Wisconsin allows for electronic wills and other estate planning documents under specific conditions, including requiring attorney supervision for remote notarization and signing."
+      description: "Wisconsin allows for electronic wills and other estate planning documents under specific conditions, including requiring attorney supervision for remote notarization and signing.",
+      effectiveDate: "July 1, 2024"
     }
   };
-
   // Define a mapping of state codes to full state names
   const stateNames = {
     "AL": "Alabama", "AK": "Alaska", "AZ": "Arizona", "AR": "Arkansas", "CA": "California",
@@ -1069,32 +1090,49 @@ document.addEventListener("DOMContentLoaded", function() {
         const stateInfo = window.stateStatutes[stateId];
         
         // Update the modal with state information
-        modalTitle.textContent = stateName;
-        modalDescription.textContent = stateInfo.description;
-        
-        // Clear any existing statute links
-        statuteLinks.innerHTML = '';
-        
-        // Handle different types of statute links
-        if (Array.isArray(stateInfo.statute)) {
-          // Multiple statutes
-          stateInfo.statute.forEach((stat, index) => {
-            const link = document.createElement('a');
-            link.href = stateInfo.url[index];
-            link.textContent = stateInfo.urlLabel ? stateInfo.urlLabel[index] : `View ${stat}`;
-            link.className = 'statute-link';
-            link.target = '_blank';
-            statuteLinks.appendChild(link);
-          });
-        } else {
-          // Single statute
-          const link = document.createElement('a');
-          link.href = stateInfo.url;
-          link.textContent = `View ${stateInfo.statute}`;
-          link.className = 'statute-link';
-          link.target = '_blank';
-          statuteLinks.appendChild(link);
-        }
+modalTitle.textContent = stateName;
+
+// Create detailed description including effective dates
+let descriptionHTML = stateInfo.description + '<br><br><strong>Effective Date';
+
+// Handle multiple effective dates
+if (Array.isArray(stateInfo.effectiveDate)) {
+  descriptionHTML += 's:</strong><br>';
+  stateInfo.effectiveDate.forEach((date, index) => {
+    const label = stateInfo.effectiveDateLabel ? stateInfo.effectiveDateLabel[index] : '';
+    descriptionHTML += `• ${label}: ${date}<br>`;
+  });
+} else {
+  // Single effective date
+  descriptionHTML += ':</strong> ' + stateInfo.effectiveDate;
+}
+
+// Set the description HTML
+modalDescription.innerHTML = descriptionHTML;
+
+// Clear any existing statute links
+statuteLinks.innerHTML = '';
+
+// Handle different types of statute links
+if (Array.isArray(stateInfo.statute)) {
+  // Multiple statutes
+  stateInfo.statute.forEach((stat, index) => {
+    const link = document.createElement('a');
+    link.href = stateInfo.url[index];
+    link.textContent = stateInfo.urlLabel ? stateInfo.urlLabel[index] : `View ${stat}`;
+    link.className = 'statute-link';
+    link.target = '_blank';
+    statuteLinks.appendChild(link);
+  });
+} else {
+  // Single statute
+  const link = document.createElement('a');
+  link.href = stateInfo.url;
+  link.textContent = `View ${stateInfo.statute}`;
+  link.className = 'statute-link';
+  link.target = '_blank';
+  statuteLinks.appendChild(link);
+}
         
         // Display the modal
         modal.style.display = "block";
@@ -1167,18 +1205,23 @@ document.addEventListener("DOMContentLoaded", function() {
       const stateInfo = window.stateStatutes["DC"];
       
       modalTitle.textContent = "District of Columbia";
-      modalDescription.textContent = stateInfo.description;
-      
-      // Clear any existing statute links
-      statuteLinks.innerHTML = '';
-      
-      // Create link for DC
-      const link = document.createElement('a');
-      link.href = stateInfo.url;
-      link.textContent = `View ${stateInfo.statute}`;
-      link.className = 'statute-link';
-      link.target = '_blank';
-      statuteLinks.appendChild(link);
+
+// Create detailed description including effective date
+let descriptionHTML = stateInfo.description + '<br><br><strong>Effective Date:</strong> ' + stateInfo.effectiveDate;
+
+// Set the description HTML
+modalDescription.innerHTML = descriptionHTML;
+
+// Clear any existing statute links
+statuteLinks.innerHTML = '';
+
+// Create link for DC
+const link = document.createElement('a');
+link.href = stateInfo.url;
+link.textContent = `View ${stateInfo.statute}`;
+link.className = 'statute-link';
+link.target = '_blank';
+statuteLinks.appendChild(link);
       
 	  modal.style.display = "block";
     });
