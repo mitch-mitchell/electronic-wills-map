@@ -887,7 +887,7 @@ document.addEventListener("DOMContentLoaded", function() {
       ],
       urlLabel: ["View Uniform Electronic Wills Act", "View Uniform Non-Testamentary Estate Planning Documents Act"],
       description: "Colorado has adopted the Uniform Electronic Wills Act and the Uniform Non-Testamentary Estate Planning Documents Act.",
-      effectiveDate: ["January 1, 2021", "January 1, 2025"],
+      effectiveDate: ["January 21, 2021", "January 1, 2025"],
       effectiveDateLabel: ["E-Wills Act", "Non-Testamentary Estate Planning Documents Act"]
     },
     "DC": {
@@ -895,28 +895,28 @@ document.addEventListener("DOMContentLoaded", function() {
       statute: "D.C. Code § 18-901",
       url: "https://code.dccouncil.us/dc/council/code/sections/18-901",
       description: "The District of Columbia has adopted the Uniform Electronic Wills Act.",
-      effectiveDate: "March 16, 2023"
+      effectiveDate: "March 10, 2023"
     },
     "FL": {
       authorizes: "e-wills",
       statute: "Fla. Stat. § 732.522",
       url: "http://www.leg.state.fl.us/Statutes/index.cfm?App_mode=Display_Statute&URL=0700-0799/0732/Sections/0732.522.html",
       description: "Florida permits electronic wills and provides specific requirements for their execution and storage.",
-      effectiveDate: "January 1, 2020"
+      effectiveDate: "July 1, 2020"
     },
     "ID": {
       authorizes: "e-wills",
       statute: "Idaho Code § 15-2-1101",
       url: "https://legislature.idaho.gov/statutesrules/idstat/title15/t15ch2/sect15-2-1101/",
       description: "Idaho has adopted the Uniform Electronic Wills Act.",
-      effectiveDate: "July 1, 2023"
+      effectiveDate: "March 21, 2023, retroactive to January 1, 2020"
     },
     "IL": {
       authorizes: "both",
       statute: "755 ILCS 6/1-1",
       url: "https://www.ilga.gov/legislation/ilcs/ilcs5.asp?ActID=4176",
       description: "Illinois has enacted the Electronic Wills, Electronic Estate Planning Documents, and Remote Witnesses Act.",
-      effectiveDate: "January 1, 2022"
+      effectiveDate: "July 26, 2021"
     },
     "IN": {
       authorizes: "e-wills",
@@ -930,7 +930,7 @@ document.addEventListener("DOMContentLoaded", function() {
       statute: "Md. Code, Est. & Trusts § 4-101",
       url: "https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=get&section=4-101&enactments=False&archived=False",
       description: "Maryland's legislation permits electronic signatures for wills and defines parameters for their validity.",
-      effectiveDate: "October 1, 2020"
+      effectiveDate: "April 21, 2022"
     },
     "MN": {
       authorizes: "e-wills",
@@ -955,7 +955,7 @@ document.addEventListener("DOMContentLoaded", function() {
       authorizes: "e-wills",
       statute: "Nev. Rev. Stat. § 133.085",
       url: "https://www.leg.state.nv.us/NRS/NRS-133.html#NRS133Sec085",
-      description: "Nevada was one of the first states to authorize electronic wills, with specific technological requirements.",
+      description: "Nevada was one of the first states to authorize electronic wills (and trusts!), with specific technological requirements.",
       effectiveDate: "July 1, 2017"
     },
     "OK": {
@@ -970,21 +970,26 @@ document.addEventListener("DOMContentLoaded", function() {
       statute: "Utah Code § 75-2-1401",
       url: "https://le.utah.gov/xcode/Title75/Chapter2/75-2-S1401.html",
       description: "Utah has adopted the Uniform Electronic Wills Act.",
-      effectiveDate: "May 5, 2020"
+      effectiveDate: "August 31, 2020"
     },
     "WA": {
       authorizes: "both",
-      statute: "Wash. Rev. Code § 11.135.005",
-      url: "https://app.leg.wa.gov/rcw/default.aspx?cite=11.135.005",
-      description: "Washington has enacted the Uniform Electronic Estate Planning Documents Act, which includes provisions for electronic wills.",
-      effectiveDate: "January 1, 2024"
+      statute: ["Wash. Rev. Code § 11.12.400", "Wash Rev. Code § 11.135.005"],
+      url: [
+        "https://app.leg.wa.gov/RCW/default.aspx?cite=11.12.400",
+        "https://app.leg.wa.gov/rcw/default.aspx?cite=11.135.005"
+      ],
+      urlLabel: ["View Uniform Electronic Wills Act", "View Uniform Electronic Estate Planning Documents Act"],
+      description: "Washington has adopted both the Uniform Electronic Wills Act and the Uniform Electronic Estate Planning Documents Act.",
+      effectiveDate: ["January 1, 2022", "June 6, 2024"],
+      effectiveDateLabel: ["E-Wills Act", "Electronic Estate Planning Documents Act"]
     },
     "WI": {
       authorizes: "both",
       statute: "Wis. Stat. Sec. 140.147",
       url: "https://docs.legis.wisconsin.gov/statutes/statutes/140/147",
       description: "Wisconsin allows for electronic wills and other estate planning documents under specific conditions, including requiring attorney supervision for remote notarization and signing.",
-      effectiveDate: "July 1, 2024"
+      effectiveDate: "March 23, 2024"
     }
   };
   // Define a mapping of state codes to full state names
