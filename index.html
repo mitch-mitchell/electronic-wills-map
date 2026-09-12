@@ -945,11 +945,16 @@ document.addEventListener("DOMContentLoaded", function() {
       effectiveDate: "April 21, 2022"
     },
     "MN": {
-      authorizes: "e-wills",
-      statute: "Minn. Stat. § 524.1-201",
-      url: "https://www.revisor.mn.gov/statutes/cite/524.1-201",
-      description: "Minnesota has updated its probate code to include provisions for electronic wills.",
-      effectiveDate: "August 1, 2023"
+      authorizes: "both",
+      statute: ["Minn. Stat. § 524.1-201", "Minn. Stat. ch. 533"],
+      url: [
+        "https://www.revisor.mn.gov/statutes/cite/524.1-201",
+        "https://www.revisor.mn.gov/statutes/2026/cite/533"
+      ],
+      urlLabel: ["View Uniform Electronic Wills Act", "View Uniform Electronic Estate Planning Documents Act"],
+      description: "Minnesota has enacted both the Uniform Electronic Wills Act and the Uniform Electronic Estate Planning Documents Act.",
+      effectiveDate: ["August 1, 2023", "August 1, 2026"],
+      effectiveDateLabel: ["E-Wills Act", "Electronic Estate Planning Documents Act"]
     },
     "MO": {
       authorizes: "both",
