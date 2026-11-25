@@ -73,6 +73,10 @@
    .other-docs-highlight {
      fill: #44aa44 !important;
    }
+   /* Amber for states that allow remote execution of paper estate planning documents */
+   .remote-highlight {
+     fill: #d98c1f !important;
+   }
    /* Active state styling when a state is clicked */
    .active {
      stroke: #000;
@@ -136,6 +140,9 @@
    }
    .legend-item .other-docs {
      background: #44aa44; /* Green color */
+   }
+   .legend-item .remote-execution {
+     background: #d98c1f; /* Amber color */
    }
    .menu-content {
      position: fixed;
@@ -380,6 +387,7 @@
 <div class="bottom-legend">
   <div class="legend-item"><span class="e-wills"></span> Authorizes electronic wills</div>
   <div class="legend-item"><span class="other-docs"></span> Authorizes e-wills & electronic estate planning documents</div>
+  <div class="legend-item"><span class="remote-execution"></span> Authorizes remote execution of paper estate planning documents</div>
 </div>
 <!-- Modal for displaying state information -->
 <div id="stateModal" class="modal">
@@ -946,9 +954,9 @@ document.addEventListener("DOMContentLoaded", function() {
     },
     "MN": {
       authorizes: "both",
-      statute: ["Minn. Stat. § 524.1-201", "Minn. Stat. ch. 533"],
+      statute: ["Minn. Stat. §§ 524.2-504 to 524.2-507, 524.2-518 (2023 Minn. Laws ch. 21)", "Minn. Stat. ch. 533"],
       url: [
-        "https://www.revisor.mn.gov/statutes/cite/524.1-201",
+        "https://www.revisor.mn.gov/laws/2023/0/21/",
         "https://www.revisor.mn.gov/statutes/2026/cite/533"
       ],
       urlLabel: ["View Uniform Electronic Wills Act", "View Uniform Electronic Estate Planning Documents Act"],
@@ -967,8 +975,8 @@ document.addEventListener("DOMContentLoaded", function() {
       authorizes: "e-wills",
       statute: "N.Y. Est. Powers & Trusts Law art. 3, pt. 6",
       url: "https://www.nysenate.gov/legislation/bills/2025/A7856/amendment/A",
-      description: "New York has enacted an Electronic Wills Act, signed by the Governor on December 12, 2025. The law has a delayed effective date of June 10, 2027.",
-      effectiveDate: "June 10, 2027"
+      description: "New York has enacted an Electronic Wills Act, signed by the Governor on December 12, 2025 (L. 2025, ch. 637). A chapter amendment signed February 13, 2026 (L. 2026, ch. 89) delayed the effective date to December 12, 2027.",
+      effectiveDate: "December 12, 2027"
     },
     "ND": {
       authorizes: "both",
@@ -1021,10 +1029,10 @@ document.addEventListener("DOMContentLoaded", function() {
       effectiveDateLabel: ["E-Wills Act", "Electronic Estate Planning Documents Act"]
     },
     "WI": {
-      authorizes: "both",
-      statute: "Wis. Stat. Sec. 140.147",
+      authorizes: "remote-execution",
+      statute: "Wis. Stat. § 140.147",
       url: "https://docs.legis.wisconsin.gov/statutes/statutes/140/147",
-      description: "Wisconsin allows for electronic wills and other estate planning documents under specific conditions, including requiring attorney supervision for remote notarization and signing.",
+      description: "Wisconsin does not authorize electronic wills. It allows wills and other estate planning documents to be signed remotely before a notary by two-way audiovisual communication, under the supervision of a Wisconsin attorney. The signed paper original must be delivered to the supervising attorney.",
       effectiveDate: "March 23, 2024"
     }
   };
@@ -1054,6 +1062,13 @@ document.addEventListener("DOMContentLoaded", function() {
   const otherDocsStates = new Set(
     Object.keys(window.stateStatutes).filter(state => 
       window.stateStatutes[state].authorizes === "both"
+    )
+  );
+  
+  // Define states that authorize remote execution of paper estate planning documents
+  const remoteStates = new Set(
+    Object.keys(window.stateStatutes).filter(state => 
+      window.stateStatutes[state].authorizes === "remote-execution"
     )
   );
   
@@ -1102,6 +1117,9 @@ document.addEventListener("DOMContentLoaded", function() {
     if (otherDocsStates.has(stateId)) {
       path.classList.add("other-docs-highlight");
     }
+    if (remoteStates.has(stateId)) {
+      path.classList.add("remote-highlight");
+    }
     
     // Add hover behavior
     path.addEventListener("mouseover", function(e) {
@@ -1123,7 +1141,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
     
     // Add click handler for states with electronic will legislation
-    if (eWillStates.has(stateId) || otherDocsStates.has(stateId)) {
+    if (eWillStates.has(stateId) || otherDocsStates.has(stateId) || remoteStates.has(stateId)) {
       path.style.cursor = "pointer";
       
       path.addEventListener("click", function() {
